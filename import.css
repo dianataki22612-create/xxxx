@@ -9,16 +9,15 @@
    Vencord / BetterDiscord colors preserved
 
    FIXES:
-   - Find or Start a Conversation = true black
-   - Search box has no border
-   - Search box only lightens on hover/focus
-   - Bottom-left account panel = true black
-   - Mute / Deafen / Settings area = black
-   - Removed unwanted account-panel grey surfaces
-   - DM selected username black-highlight bug fixed
-   - Home tab / Quests black-highlight bug reduced
-   - Server hover ghost-black artifact reduced
-   - Full profile modal preserved
+   - DM sidebar is TRUE BLACK
+   - Find or Start a Conversation is TRUE BLACK
+   - No ugly grey border around DM search
+   - DM search hover is subtle #080808
+   - DM selected rows do not create black username blocks
+   - Bottom-left account / voice panel is TRUE BLACK
+   - Mute / Deafen / Settings area is TRUE BLACK
+   - Home tabs protected from unwanted black highlights
+   - Full profile view protected
    ========================================================= */
 
 
@@ -273,16 +272,12 @@ body {
     background: transparent !important;
 }
 
-
-/* =========================================================
-   SERVER WRAPPERS
-   ========================================================= */
-
-[class*="guilds_"] [class*="listItem_"] > [class*="wrapper_"] {
+[class*="guilds_"]
+[class*="listItem_"]
+> [class*="wrapper_"] {
     background: transparent !important;
     background-color: transparent !important;
     background-image: none !important;
-
     box-shadow: none !important;
     filter: none !important;
 
@@ -290,27 +285,24 @@ body {
         transform 0.18s ease !important;
 }
 
-[class*="guilds_"] [class*="listItem_"] > [class*="wrapper_"]:hover,
-[class*="guilds_"] [class*="listItem_"] > [class*="wrapper_"]:active {
+[class*="guilds_"]
+[class*="listItem_"]
+> [class*="wrapper_"]:hover {
     background: transparent !important;
     background-color: transparent !important;
-    background-image: none !important;
-
     box-shadow: none !important;
 }
 
-[class*="guilds_"] [class*="listItem_"] > [class*="wrapper_"]::before,
-[class*="guilds_"] [class*="listItem_"] > [class*="wrapper_"]::after {
+[class*="guilds_"]
+[class*="listItem_"]
+> [class*="wrapper_"]:active {
+    transform: scale(0.97) !important;
     background: transparent !important;
-    box-shadow: none !important;
+    background-color: transparent !important;
 }
 
-
-/* =========================================================
-   SERVER IMAGES
-   ========================================================= */
-
-[class*="guilds_"] [class*="listItem_"] img {
+[class*="guilds_"]
+[class*="listItem_"] img {
     filter: none !important;
     opacity: 1 !important;
 }
@@ -333,29 +325,12 @@ body {
     background-color: #080808 !important;
 }
 
-
-/* =========================================================
-   SELECTED SERVER
-   ========================================================= */
-
 [class*="guilds_"]
 [class*="listItem_"]
-[class*="wrapper_"][aria-selected="true"] {
+[class*="selected_"] {
     background: transparent !important;
     box-shadow: none !important;
 }
-
-[class*="guilds_"]
-[class*="listItem_"]
-[class*="wrapper_"][class*="selected_"] {
-    background: transparent !important;
-    box-shadow: none !important;
-}
-
-
-/* =========================================================
-   SERVER PILL
-   ========================================================= */
 
 [class*="guilds_"] [class*="pill_"] {
     background: transparent !important;
@@ -375,14 +350,8 @@ body {
 [class*="sidebarList_"] {
     background: #000000 !important;
     background-color: #000000 !important;
-
     border: none !important;
 }
-
-
-/* =========================================================
-   SERVER CHANNEL LIST
-   ========================================================= */
 
 [class*="sidebar_"] [class*="channels_"] {
     background: #000000 !important;
@@ -402,13 +371,12 @@ body {
 [class*="sidebar_"] [class*="header_"] {
     background: #000000 !important;
     background-color: #000000 !important;
-
     box-shadow: none !important;
 }
 
 
 /* =========================================================
-   CHANNEL ITEMS
+   SERVER CHANNEL ITEMS
    ========================================================= */
 
 [class*="sidebar_"]
@@ -444,18 +412,21 @@ body {
 [class*="modeSelectable_"]
 [class*="name_"] {
     color: #a8a8a8 !important;
+    background: transparent !important;
 }
 
 [class*="sidebar_"]
 [class*="modeSelectable_"]:hover
 [class*="name_"] {
     color: #d0d0d0 !important;
+    background: transparent !important;
 }
 
 [class*="sidebar_"]
 [class*="modeSelected_"]
 [class*="name_"] {
     color: #ffffff !important;
+    background: transparent !important;
 }
 
 
@@ -477,7 +448,7 @@ body {
 
 
 /* =========================================================
-   CHANNEL CATEGORY HEADERS
+   CHANNEL CATEGORIES
    ========================================================= */
 
 [class*="sidebar_"]
@@ -492,75 +463,171 @@ body {
 
 
 /* =========================================================
-   DM SIDEBAR — TRUE BLACK
+   =========================================================
+   DIRECT MESSAGE SIDEBAR — TRUE BLACK FOUNDATION
+   =========================================================
    ========================================================= */
+
+/*
+   Discord nests the DM UI inside several surfaces.
+   The old CSS only changed privateChannels_, leaving
+   inner scrollers and containers grey.
+
+   These selectors intentionally target ONLY the DM sidebar.
+*/
+
+
+/* Main DM sidebar */
 
 [class*="privateChannels_"] {
     background: #000000 !important;
     background-color: #000000 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+
+/* DM sidebar direct children */
+
+[class*="privateChannels_"] > * {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+
+/* DM scroller */
+
+[class*="privateChannels_"]
+[class*="scroller_"] {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    background-image: none !important;
+}
+
+
+/* DM scroller inner content */
+
+[class*="privateChannels_"]
+[class*="scroller_"] > * {
+    background-color: transparent !important;
+}
+
+
+/* DM list containers */
+
+[class*="privateChannels_"]
+[class*="content_"],
+[class*="privateChannels_"]
+[class*="container_"] {
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 
 /* =========================================================
    FIND OR START A CONVERSATION
-   TRUE BLACK / NO BORDER
    ========================================================= */
 
-[class*="privateChannels_"] [class*="searchBar_"],
-[class*="privateChannels_"] [class*="searchBar_"] > div,
-[class*="privateChannels_"] [class*="searchBar_"] > div > div {
+/*
+   IMPORTANT:
+   The searchBar_ class exists elsewhere in Discord.
+   Every selector here is scoped to privateChannels_
+   so only the DM search is affected.
+*/
+
+
+/* Outer search wrapper */
+
+[class*="privateChannels_"]
+[class*="searchBar_"] {
     background: #000000 !important;
     background-color: #000000 !important;
 
-    border: 0 !important;
-    border-color: transparent !important;
-
-    outline: 0 !important;
+    border: none !important;
+    outline: none !important;
     box-shadow: none !important;
 
-    background-image: none !important;
+    border-radius: 8px !important;
+
+    transition:
+        background-color 0.18s ease !important;
 }
 
-[class*="privateChannels_"] [class*="searchBar_"]:hover,
-[class*="privateChannels_"] [class*="searchBar_"]:hover > div,
-[class*="privateChannels_"] [class*="searchBar_"]:hover > div > div {
+
+/* Search wrapper hover */
+
+[class*="privateChannels_"]
+[class*="searchBar_"]:hover {
     background: #080808 !important;
     background-color: #080808 !important;
 
-    border: 0 !important;
-    border-color: transparent !important;
-
-    outline: 0 !important;
+    border: none !important;
+    outline: none !important;
     box-shadow: none !important;
 }
 
-[class*="privateChannels_"] [class*="searchBar_"]:focus,
-[class*="privateChannels_"] [class*="searchBar_"]:focus-within,
-[class*="privateChannels_"] [class*="searchBar_"]:focus-within > div,
-[class*="privateChannels_"] [class*="searchBar_"]:focus-within > div > div {
+
+/* Search wrapper focus */
+
+[class*="privateChannels_"]
+[class*="searchBar_"]:focus,
+[class*="privateChannels_"]
+[class*="searchBar_"]:focus-within {
     background: #080808 !important;
     background-color: #080808 !important;
 
-    border: 0 !important;
-    border-color: transparent !important;
-
-    outline: 0 !important;
+    border: none !important;
+    outline: none !important;
     box-shadow: none !important;
 }
 
-[class*="privateChannels_"] [class*="searchBar_"] input {
+
+/* Remove every inner grey surface */
+
+[class*="privateChannels_"]
+[class*="searchBar_"] *,
+[class*="privateChannels_"]
+[class*="searchBar_"] > div,
+[class*="privateChannels_"]
+[class*="searchBar_"] > div > div {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
+/* Search inner surface */
+
+[class*="privateChannels_"]
+[class*="searchBar_"] > div {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+
+/* Search input */
+
+[class*="privateChannels_"]
+[class*="searchBar_"]
+input {
     background: transparent !important;
     background-color: transparent !important;
 
-    border: 0 !important;
-    outline: 0 !important;
-    box-shadow: none !important;
-
     color: #d0d0d0 !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
-[class*="privateChannels_"] [class*="searchBar_"] input::placeholder {
+
+/* Search placeholder */
+
+[class*="privateChannels_"]
+[class*="searchBar_"]
+input::placeholder {
     color: #777777 !important;
+    opacity: 1 !important;
 }
 
 [class*="privateChannels_"]
@@ -570,6 +637,9 @@ body {
     background: transparent !important;
 }
 
+
+/* Search icon */
+
 [class*="privateChannels_"]
 [class*="searchBar_"]
 [class*="icon_"] {
@@ -578,28 +648,46 @@ body {
 
 
 /* =========================================================
-   DIRECT MESSAGE ROWS
+   DM LIST ROWS
    ========================================================= */
+
+/* Normal DM */
 
 [class*="privateChannels_"]
 [class*="channel_"] {
     background: transparent !important;
     background-color: transparent !important;
 
+    border: none !important;
     box-shadow: none !important;
 }
+
+
+/* DM hover */
 
 [class*="privateChannels_"]
 [class*="channel_"]:hover {
     background: #080808 !important;
     background-color: #080808 !important;
+
+    border: none !important;
+    box-shadow: none !important;
 }
+
+
+/* Selected DM */
 
 [class*="privateChannels_"]
 [class*="channel_"][class*="selected_"] {
-    background: #0a0a0a !important;
-    background-color: #0a0a0a !important;
+    background: #080808 !important;
+    background-color: #080808 !important;
+
+    border: none !important;
+    box-shadow: none !important;
 }
+
+
+/* Selected DM hover */
 
 [class*="privateChannels_"]
 [class*="channel_"][class*="selected_"]:hover {
@@ -609,7 +697,7 @@ body {
 
 
 /* =========================================================
-   DM USERNAME — REMOVE BLACK HIGHLIGHT
+   DM USERNAME — REMOVE BLACK BLOCK
    ========================================================= */
 
 [class*="privateChannels_"]
@@ -624,8 +712,12 @@ body {
     background: transparent !important;
     background-color: transparent !important;
 
+    border: none !important;
     box-shadow: none !important;
 }
+
+
+/* Selected username */
 
 [class*="privateChannels_"]
 [class*="channel_"][class*="selected_"]
@@ -639,9 +731,138 @@ body {
     background: transparent !important;
     background-color: transparent !important;
 
+    border: none !important;
     box-shadow: none !important;
 
     color: #ffffff !important;
+}
+
+
+/* DM icons */
+
+[class*="privateChannels_"]
+[class*="channel_"]
+[class*="icon_"] {
+    color: #888888 !important;
+}
+
+[class*="privateChannels_"]
+[class*="channel_"]:hover
+[class*="icon_"] {
+    color: #d0d0d0 !important;
+}
+
+
+/* =========================================================
+   BOTTOM-LEFT ACCOUNT / VOICE PANEL
+   ========================================================= */
+
+/*
+   Force the complete bottom-left account area black.
+   This includes:
+   - Username
+   - Avatar area
+   - Mute
+   - Deafen
+   - Settings
+   - Voice connection area
+   - Activity panel
+*/
+
+
+[class*="panels_"] {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    background-image: none !important;
+
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+/* Every direct panel section */
+
+[class*="panels_"] > * {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    background-image: none !important;
+
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+/* Account / user panel */
+
+[class*="panels_"]
+[class*="container_"] {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+
+/* Account panel inner */
+
+[class*="panels_"]
+[class*="container_"] > * {
+    background-color: transparent !important;
+}
+
+
+/* Activity */
+
+[class*="activityPanel_"] {
+    background: #000000 !important;
+    background-color: #000000 !important;
+
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+/* Voice connection panel */
+
+[class*="connection_"] {
+    background: #000000 !important;
+    background-color: #000000 !important;
+
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+/* User information */
+
+[class*="panels_"]
+[class*="username_"],
+[class*="panels_"]
+[class*="nameTag_"] {
+    background: transparent !important;
+    color: #d0d0d0 !important;
+}
+
+
+/* Bottom-left control buttons */
+
+[class*="panels_"]
+button {
+    background: transparent !important;
+    background-color: transparent !important;
+
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+/* Control button hover */
+
+[class*="panels_"]
+button:hover {
+    background: #080808 !important;
+    background-color: #080808 !important;
+
+    border: none !important;
+    box-shadow: none !important;
 }
 
 
@@ -665,7 +886,6 @@ body {
 [class*="chatTypingGradient_"],
 [class*="chatGradient_"] {
     background: none !important;
-    background-image: none !important;
 }
 
 
@@ -708,11 +928,13 @@ body {
    ========================================================= */
 
 [class*="message_"]:hover {
-    background: rgba(255, 255, 255, 0.012) !important;
+    background:
+        rgba(255, 255, 255, 0.012) !important;
 }
 
 [class*="message_"][class*="selected_"] {
-    background: rgba(255, 255, 255, 0.025) !important;
+    background:
+        rgba(255, 255, 255, 0.025) !important;
 }
 
 
@@ -795,7 +1017,6 @@ body {
 [class*="notice_"] {
     background: #080808 !important;
     color: #e7e7e7 !important;
-
     border-color:
         rgba(255, 255, 255, 0.05) !important;
 }
@@ -807,7 +1028,6 @@ body {
 [class*="notice_"] button {
     background: #111111 !important;
     color: #d0d0d0 !important;
-
     border: none !important;
 }
 
@@ -888,7 +1108,8 @@ a:not([class*="vc-"]):not([class*="bd-"]):hover,
    ========================================================= */
 
 [class*="menu_"] {
-    background: rgba(5, 5, 5, 0.97) !important;
+    background:
+        rgba(5, 5, 5, 0.97) !important;
 
     border:
         1px solid rgba(255, 255, 255, 0.05) !important;
@@ -921,7 +1142,8 @@ a:not([class*="vc-"]):not([class*="bd-"]):hover,
 
 [class*="popover_"],
 [class*="popout_"] {
-    background: rgba(5, 5, 5, 0.97) !important;
+    background:
+        rgba(5, 5, 5, 0.97) !important;
 
     border:
         1px solid rgba(255, 255, 255, 0.05) !important;
@@ -962,7 +1184,8 @@ a:not([class*="vc-"]):not([class*="bd-"]):hover,
 
 [class*="backdrop_"],
 [class*="scrim_"] {
-    background: rgba(0, 0, 0, 0.72) !important;
+    background:
+        rgba(0, 0, 0, 0.72) !important;
 }
 
 
@@ -973,7 +1196,6 @@ a:not([class*="vc-"]):not([class*="bd-"]):hover,
 [class*="userProfileModalOuter"] {
     background: transparent !important;
     background-color: transparent !important;
-
     background-image: none !important;
 
     box-shadow: none !important;
@@ -983,13 +1205,10 @@ a:not([class*="vc-"]):not([class*="bd-"]):hover,
 [class*="userProfileOuter"] {
     background: #000000 !important;
     background-color: #000000 !important;
-
     background-image: none !important;
 
     opacity: 1 !important;
-
     filter: none !important;
-
     mix-blend-mode: normal !important;
 }
 
@@ -1011,7 +1230,6 @@ a:not([class*="vc-"]):not([class*="bd-"]):hover,
 [class*="contentRegion_"],
 [class*="contentRegionScroller_"] {
     background: #000000 !important;
-    background-color: #000000 !important;
 }
 
 [class*="cardPrimary_"],
@@ -1020,114 +1238,6 @@ a:not([class*="vc-"]):not([class*="bd-"]):hover,
 
     border-color:
         rgba(255, 255, 255, 0.04) !important;
-}
-
-
-/* =========================================================
-   BOTTOM LEFT ACCOUNT / VOICE PANEL
-   TRUE BLACK
-   ========================================================= */
-
-/* Main panel */
-[class*="panels_"] {
-    background: #000000 !important;
-    background-color: #000000 !important;
-
-    border: 0 !important;
-    border-top: 0 !important;
-
-    box-shadow: none !important;
-
-    background-image: none !important;
-}
-
-/* All direct child surfaces */
-[class*="panels_"] > *,
-[class*="panels_"] > div,
-[class*="panels_"] > div > div {
-    background: #000000 !important;
-    background-color: #000000 !important;
-
-    border: 0 !important;
-
-    box-shadow: none !important;
-
-    background-image: none !important;
-}
-
-/* Account containers */
-[class*="panels_"] [class*="container_"],
-[class*="panels_"] [class*="containerDefault_"],
-[class*="panels_"] [class*="panel_"] {
-    background: #000000 !important;
-    background-color: #000000 !important;
-
-    border: 0 !important;
-
-    box-shadow: none !important;
-
-    background-image: none !important;
-}
-
-/* Activity panel */
-[class*="panels_"] [class*="activityPanel_"] {
-    background: #000000 !important;
-    background-color: #000000 !important;
-
-    border: 0 !important;
-
-    box-shadow: none !important;
-}
-
-/* Voice panel */
-[class*="panels_"] [class*="voicePanel_"] {
-    background: #000000 !important;
-    background-color: #000000 !important;
-
-    border: 0 !important;
-
-    box-shadow: none !important;
-}
-
-/* User avatar / name */
-[class*="panels_"] [class*="avatarWrapper_"],
-[class*="panels_"] [class*="nameTag_"],
-[class*="panels_"] [class*="withTagAsButton_"] {
-    background: transparent !important;
-    background-color: transparent !important;
-
-    border: 0 !important;
-
-    box-shadow: none !important;
-}
-
-/* Mute / deafen / settings */
-[class*="panels_"] button,
-[class*="panels_"] [role="button"] {
-    background: transparent !important;
-    background-color: transparent !important;
-
-    border: 0 !important;
-
-    box-shadow: none !important;
-}
-
-/* Account button hover */
-[class*="panels_"] button:hover,
-[class*="panels_"] [role="button"]:hover {
-    background: #080808 !important;
-    background-color: #080808 !important;
-
-    border: 0 !important;
-
-    box-shadow: none !important;
-}
-
-[class*="panels_"]
-[class*="username_"],
-[class*="panels_"]
-[class*="nameTag_"] {
-    color: #d0d0d0 !important;
 }
 
 
@@ -1154,7 +1264,6 @@ a:not([class*="vc-"]):not([class*="bd-"]):hover,
 [role="tab"] {
     background: transparent !important;
     background-color: transparent !important;
-
     box-shadow: none !important;
 }
 
@@ -1164,7 +1273,6 @@ a:not([class*="vc-"]):not([class*="bd-"]):hover,
 [role="tab"]:hover {
     background: #080808 !important;
     background-color: #080808 !important;
-
     box-shadow: none !important;
 }
 
@@ -1174,31 +1282,9 @@ a:not([class*="vc-"]):not([class*="bd-"]):hover,
 [role="tab"][aria-selected="true"] {
     background: transparent !important;
     background-color: transparent !important;
-
     box-shadow: none !important;
 
     color: #e7e7e7 !important;
-}
-
-
-/* =========================================================
-   HOME QUESTS — REMOVE BLACK HIGHLIGHT
-   ========================================================= */
-
-[class*="homeWrapper_"] [class*="quest_"],
-[class*="homeWrapper_"] [class*="quests_"],
-[class*="homeWrapper_"] [class*="questItem_"] {
-    background: transparent !important;
-    background-color: transparent !important;
-
-    box-shadow: none !important;
-}
-
-[class*="homeWrapper_"] [class*="quest_"]:hover,
-[class*="homeWrapper_"] [class*="quests_"]:hover,
-[class*="homeWrapper_"] [class*="questItem_"]:hover {
-    background: #080808 !important;
-    background-color: #080808 !important;
 }
 
 
@@ -1209,7 +1295,6 @@ a:not([class*="vc-"]):not([class*="bd-"]):hover,
 [class*="contentWrapper_"],
 [class*="emojiPicker_"] {
     background: #080808 !important;
-    background-color: #080808 !important;
 }
 
 
@@ -1255,15 +1340,12 @@ a:not([class*="vc-"]):not([class*="bd-"]):hover,
 
 [class*="folderGroupBackground_"] {
     background: #080808 !important;
-
     border: none !important;
-
     box-shadow: none !important;
 }
 
 [class*="groupContainer_"] {
     background: transparent !important;
-
     border: none !important;
 }
 
@@ -1355,7 +1437,7 @@ a:not([class*="vc-"]):not([class*="bd-"]):hover,
 
 
 /* =========================================================
-   FOCUS RESET
+   SAFE FOCUS RESET
    ========================================================= */
 
 [class*="channel_"]:focus,
