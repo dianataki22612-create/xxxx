@@ -1197,3 +1197,129 @@ a:not([class*="vc-"]):not([class*="bd-"]):hover,
 [class*="anchor_"]:not([class*="vc-"]):not([class*="bd-"]):hover {
   color: #ffffff !important;
 }
+
+
+
+
+/* =========================================================
+   PITCHBLACK - REMOVE DISCORD BRAND BLUE/PURPLE
+   ========================================================= */
+
+:root {
+    --SL-accentCol: #000000 !important;
+    --SL-linkCol: #d0d0d0 !important;
+}
+
+/* Discord normal brand/accent colors */
+.theme-dark {
+    --text-brand: #d0d0d0 !important;
+    --blurple-50: #d0d0d0 !important;
+    --primary-400: #d0d0d0 !important;
+    --control-brand-foreground: #d0d0d0 !important;
+
+    /* Black interactive states */
+    --interactive-background-hover: #080808 !important;
+    --interactive-background-selected: #080808 !important;
+    --control-primary-background-hover: #080808 !important;
+    --control-primary-background-default: #000000 !important;
+    --control-secondary-background-hover: #080808 !important;
+
+    /* Keep normal Discord text */
+    --text-default: #e7e7e7 !important;
+    --text-strong: #e7e7e7 !important;
+    --text-subtle: #a0a0a0 !important;
+    --text-link: #d0d0d0 !important;
+}
+
+/* Find or start a conversation */
+.privateChannels_e6b769 [class*="searchBar_"],
+.privateChannels_e6b769 [class*="searchBar_"] *,
+[class*="searchBar_"] [class*="inner_"] {
+    background: #080808 !important;
+    color: #e7e7e7 !important;
+}
+
+/* Search placeholder */
+.privateChannels_e6b769 input::placeholder,
+[class*="searchBar_"] input::placeholder {
+    color: #a0a0a0 !important;
+}
+
+/* Discord announcements / notice bars */
+.notice_c5cd6a {
+    background: #080808 !important;
+    color: #e7e7e7 !important;
+}
+
+.notice_c5cd6a *,
+.notice_c5cd6a a {
+    color: #e7e7e7 !important;
+}
+
+.notice_c5cd6a button {
+    background: #111111 !important;
+    color: #e7e7e7 !important;
+}
+
+.notice_c5cd6a button:hover {
+    background: #181818 !important;
+    color: #ffffff !important;
+}
+
+/* Server hover - remove Discord blue/purple */
+.wrapper__6e9f8:hover .childWrapper__6e9f8,
+.wrapper__6e9f8.selected__6e9f8 .childWrapper__6e9f8 {
+    background: #080808 !important;
+    color: #e7e7e7 !important;
+}
+
+/* Server icon itself - don't recolor actual server images */
+.wrapper__6e9f8:hover img,
+.wrapper__6e9f8.selected__6e9f8 img {
+    filter: none !important;
+}
+
+/* Home / Discord icon - don't force a color */
+.wrapper__6e9f8 .childWrapper__6e9f8 svg {
+    color: inherit !important;
+}
+
+/* Server selection pill - neutral instead of blue */
+[class*="guilds_"] [class*="item_"]::before,
+[class*="guilds_"] [class*="item_"]::after {
+    background-color: #d0d0d0 !important;
+}
+
+/* Remove blue hover backgrounds from normal Discord UI */
+[class*="interactive"]:hover,
+[class*="clickable"]:hover {
+    --blurple-1: #080808 !important;
+}
+
+/* Normal Discord brand buttons */
+[class*="button"][class*="lookFilled"] {
+    --button-background: #080808 !important;
+    --button-background-hover: #111111 !important;
+}
+
+/* Mentions should stay neutral */
+[class*="mention_"] {
+    color: #d0d0d0 !important;
+    background: rgba(255, 255, 255, 0.035) !important;
+}
+
+[class*="mention_"]:hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Normal Discord links */
+a,
+[class*="anchor_"] {
+    color: #d0d0d0 !important;
+}
+
+a:hover,
+[class*="anchor_"]:hover {
+    color: #ffffff !important;
+}
