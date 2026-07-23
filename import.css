@@ -1,1700 +1,1186 @@
 @charset "UTF-8";
 
 /* =========================================================
-PITCHBLACK — IMPORT / BASE FOUNDATION
-Version 4.1
------------
+   PITCHBLACK — IMPORT / BASE FOUNDATION
+   Version 5.0
 
-TRUE BLACK DISCORD UI
-Monochrome native Discord interface
-Vencord / BetterDiscord colors preserved where possible
+   TRUE BLACK DISCORD UI
+   Monochrome native Discord interface
+   Vencord / BetterDiscord colors preserved
 
-IMPORTANT:
+   This file provides the foundation.
+   pitchblack.css provides the visual layer.
 
-* No global wrapper_ background rules
-* No global container_ background rules
-* No global channel_ background rules
-* No aggressive final black foundation
-* DM sidebar and server sidebar handled separately
-  ========================================================= */
+   IMPORTANT:
+   - No broad wrapper_ backgrounds
+   - No broad container_ backgrounds
+   - No global channel_ backgrounds
+   - No aggressive final black overrides
+   - No profile-modal destruction
+   - No global button recoloring
+   ========================================================= */
+
 
 /* =========================================================
-CORE VARIABLES
-========================================================= */
+   CORE VARIABLES
+   ========================================================= */
 
 :root {
+    --font-primary: var(--SL-font, "Nunito", sans-serif);
+    --font-code: var(--SL-code, "JetBrains Mono", monospace);
 
---font-primary: var(--SL-font, "Nunito", sans-serif);
---font-code: var(--SL-code, "JetBrains Mono", monospace);
+    /* Main surfaces */
+    --SL-mainCol: #000000;
+    --SL-secCol: #080808;
 
-/* -------------------------------------------------------
-Main surfaces
-------------------------------------------------------- */
+    --SL-surface-1: #080808;
+    --SL-surface-2: #0a0a0a;
+    --SL-surface-3: #0d0d0d;
+    --SL-surface-4: #111111;
 
---SL-mainCol: #000000;
---SL-secCol: #080808;
+    /* Text */
+    --SL-txtCol: #d0d0d0;
+    --SL-txtStrong: #e7e7e7;
+    --SL-txtMuted: #888888;
+    --SL-txtFaint: #666666;
 
---SL-surface-1: #080808;
---SL-surface-2: #0a0a0a;
---SL-surface-3: #0d0d0d;
---SL-surface-4: #111111;
+    /* Icons */
+    --SL-icon: #bdbdbd;
+    --SL-iconMuted: #888888;
 
-/* -------------------------------------------------------
-Text
-------------------------------------------------------- */
+    /* Borders */
+    --SL-border: rgba(255, 255, 255, 0.06);
+    --SL-borderSoft: rgba(255, 255, 255, 0.04);
+    --SL-borderStrong: rgba(255, 255, 255, 0.10);
 
---SL-txtCol: #d0d0d0;
---SL-txtStrong: #e7e7e7;
---SL-txtMuted: #888888;
---SL-txtFaint: #666666;
+    /* Accent */
+    --SL-accentCol: #000000;
 
-/* -------------------------------------------------------
-Icons
-------------------------------------------------------- */
+    /* Effects */
+    --SL-blur: 15px;
 
---SL-icon: #bdbdbd;
---SL-iconMuted: #888888;
+    /* Message input */
+    --SL-msgBar: #080808;
 
-/* -------------------------------------------------------
-Borders
-------------------------------------------------------- */
+    /* Links */
+    --SL-linkCol: #c8c8c8;
 
---SL-border: rgba(255, 255, 255, 0.06);
---SL-borderSoft: rgba(255, 255, 255, 0.04);
---SL-borderStrong: rgba(255, 255, 255, 0.10);
+    /* Mentions */
+    --SL-mentionCol: #d0d0d0;
+    --SL-mentionColBg: rgba(255, 255, 255, 0.035);
 
-/* -------------------------------------------------------
-Accent
-------------------------------------------------------- */
+    /* Legacy compatibility */
+    --SL-opacity: 100%;
+    --SL-spoiler: 20px;
+    --SL-profileCol: transparent;
 
---SL-accentCol: #000000;
+    --SL-gradCol1: rgba(0, 0, 0, 0.3);
+    --SL-gradCol2: rgba(0, 0, 0, 0.3);
 
-/* -------------------------------------------------------
-Effects
-------------------------------------------------------- */
+    --SL-mainCol-light: #000000;
+    --SL-secCol-light: #080808;
+    --SL-accentCol-light: #000000;
 
---SL-blur: 15px;
+    --SL-profileCol-light: transparent;
 
-/* -------------------------------------------------------
-Message input
-------------------------------------------------------- */
-
---SL-msgBar: #0a0a0a;
-
-/* -------------------------------------------------------
-Links
-------------------------------------------------------- */
-
---SL-linkCol: #c8c8c8;
-
-/* -------------------------------------------------------
-Mentions
-------------------------------------------------------- */
-
---SL-mentionCol: #d0d0d0;
---SL-mentionColBg: rgba(255, 255, 255, 0.035);
-
-/* -------------------------------------------------------
-Legacy compatibility
-------------------------------------------------------- */
-
---SL-opacity: 100%;
---SL-spoiler: 20px;
---SL-profileCol: transparent;
-
---SL-gradCol1: rgba(0, 0, 0, 0.3);
---SL-gradCol2: rgba(0, 0, 0, 0.3);
-
---SL-mainCol-light: #000000;
---SL-secCol-light: #080808;
---SL-accentCol-light: #000000;
-
---SL-profileCol-light: transparent;
-
---SL-mentionCol-light: #d0d0d0;
---SL-txtCol-light: #d0d0d0;
---SL-linkCol-light: #c8c8c8;
---SL-icon-light: #bdbdbd;
---SL-msgBar-light: #0a0a0a;
+    --SL-mentionCol-light: #d0d0d0;
+    --SL-txtCol-light: #d0d0d0;
+    --SL-linkCol-light: #c8c8c8;
+    --SL-icon-light: #bdbdbd;
+    --SL-msgBar-light: #080808;
 }
 
+
 /* =========================================================
-GLOBAL ROOT
-========================================================= */
+   GLOBAL ROOT
+   ========================================================= */
 
 html,
 body,
 #app-mount {
-
-background-color: #000000 !important;
-color: #d0d0d0 !important;
-
+    background: #000000 !important;
+    background-color: #000000 !important;
+    color: #d0d0d0 !important;
 }
 
 body {
-
-margin: 0;
-
-font-family:
-var(--font-primary) !important;
-
-background-color:
-#000000 !important;
-
+    margin: 0 !important;
+    font-family: var(--font-primary) !important;
 }
-
-/* Text selection */
 
 ::selection {
-
-background:
-#222222 !important;
-
-color:
-#ffffff !important;
-
+    background: #222222 !important;
+    color: #ffffff !important;
 }
 
+
 /* =========================================================
-DISCORD NATIVE COLOR VARIABLES
-========================================================= */
+   DISCORD NATIVE COLOR VARIABLES
+   ========================================================= */
 
 .theme-dark,
 .theme-light {
 
-/* -------------------------------------------------------
-Main backgrounds
-------------------------------------------------------- */
+    /* Main backgrounds */
+    --background-primary: #000000;
+    --background-secondary: #000000;
+    --background-secondary-alt: #080808;
+    --background-tertiary: #080808;
 
---background-primary: #000000;
---background-secondary: #000000;
---background-secondary-alt: #080808;
---background-tertiary: #080808;
+    --background-base-lowest: #000000;
+    --background-base-lower: #000000;
+    --background-base-low: #000000;
 
---background-base-lowest: #000000;
---background-base-lower: #000000;
---background-base-low: #000000;
+    /* Surfaces */
+    --background-surface-high: #080808;
+    --background-surface-higher: #0a0a0a;
+    --background-surface-highest: #0d0d0d;
 
-/* -------------------------------------------------------
-Surfaces
-------------------------------------------------------- */
+    /* Floating surfaces */
+    --background-floating: #080808;
+    --background-nested-floating: #080808;
 
---background-surface-high: #080808;
---background-surface-higher: #0a0a0a;
---background-surface-highest: #0d0d0d;
+    /* Modifiers */
+    --background-modifier-hover:
+        rgba(255, 255, 255, 0.025);
 
-/* -------------------------------------------------------
-Floating surfaces
-------------------------------------------------------- */
+    --background-modifier-active:
+        rgba(255, 255, 255, 0.04);
 
---background-floating: #080808;
---background-nested-floating: #080808;
+    --background-modifier-selected:
+        rgba(255, 255, 255, 0.05);
 
-/* -------------------------------------------------------
-Modifiers
-------------------------------------------------------- */
+    --background-modifier-accent:
+        rgba(255, 255, 255, 0.06);
 
---background-modifier-hover:
-rgba(255, 255, 255, 0.025);
+    /* Chat */
+    --chat-background-default:
+        #000000;
 
---background-modifier-active:
-rgba(255, 255, 255, 0.04);
+    /* Inputs */
+    --input-background-default:
+        #080808;
 
---background-modifier-selected:
-rgba(255, 255, 255, 0.05);
+    /* Cards */
+    --card-background-default:
+        #080808;
 
---background-modifier-accent:
-rgba(255, 255, 255, 0.06);
+    /* Headers */
+    --header-primary:
+        #e7e7e7;
 
-/* -------------------------------------------------------
-Chat
-------------------------------------------------------- */
+    --header-secondary:
+        #999999;
 
---chat-background-default:
-#000000;
+    --__header-bar-background:
+        #000000;
 
-/* -------------------------------------------------------
-Inputs
-------------------------------------------------------- */
+    /* Text */
+    --text-default:
+        #d0d0d0;
 
---input-background-default:
-#080808;
+    --text-strong:
+        #e7e7e7;
 
-/* -------------------------------------------------------
-Cards
-------------------------------------------------------- */
+    --text-subtle:
+        #888888;
 
---card-background-default:
-#080808;
+    --text-muted:
+        #777777;
 
-/* -------------------------------------------------------
-Headers
-------------------------------------------------------- */
+    /* Links */
+    --text-link:
+        #c8c8c8;
 
---header-primary:
-#e7e7e7;
+    --text-brand:
+        #d0d0d0;
 
---header-secondary:
-#999999;
+    /* Icons */
+    --icon-subtle:
+        #888888;
 
---__header-bar-background:
-#000000;
+    --icon-strong:
+        #bdbdbd;
 
-/* -------------------------------------------------------
-Text
-------------------------------------------------------- */
+    /* Mentions */
+    --mention-foreground:
+        #d0d0d0;
 
---text-default:
-#d0d0d0;
+    --mention-background:
+        rgba(255, 255, 255, 0.035);
 
---text-strong:
-#e7e7e7;
+    /* Messages */
+    --message-mentioned-background-default:
+        rgba(255, 255, 255, 0.025);
 
---text-subtle:
-#888888;
+    --message-mentioned-background-hover:
+        rgba(255, 255, 255, 0.04);
 
---text-muted:
-#777777;
+    /* Borders */
+    --border-normal:
+        rgba(255, 255, 255, 0.06);
 
-/* -------------------------------------------------------
-Links
-------------------------------------------------------- */
+    --border-subtle:
+        rgba(255, 255, 255, 0.04);
 
---text-link:
-#c8c8c8;
+    /* Discord brand / blurple */
+    --brand-experiment:
+        #080808;
 
---text-brand:
-#d0d0d0;
+    --brand-experiment-100:
+        #e7e7e7;
 
-/* -------------------------------------------------------
-Icons
-------------------------------------------------------- */
+    --brand-experiment-200:
+        #d0d0d0;
 
---icon-subtle:
-#888888;
+    --brand-experiment-300:
+        #b0b0b0;
 
---icon-strong:
-#bdbdbd;
+    --brand-experiment-400:
+        #909090;
 
-/* -------------------------------------------------------
-Mentions
-------------------------------------------------------- */
+    --brand-experiment-500:
+        #080808;
 
---mention-foreground:
-#d0d0d0;
+    --brand-experiment-600:
+        #000000;
 
---mention-background:
-rgba(255, 255, 255, 0.035);
+    --brand-experiment-700:
+        #000000;
 
-/* -------------------------------------------------------
-Messages
-------------------------------------------------------- */
+    --control-brand-foreground:
+        #e7e7e7;
 
---message-mentioned-background-default:
-rgba(255, 255, 255, 0.025);
+    --primary-500-hsl:
+        0 0% 4%;
 
---message-mentioned-background-hover:
-rgba(255, 255, 255, 0.04);
-
-/* -------------------------------------------------------
-Borders
-------------------------------------------------------- */
-
---border-normal:
-rgba(255, 255, 255, 0.06);
-
---border-subtle:
-rgba(255, 255, 255, 0.04);
-
-/* -------------------------------------------------------
-Discord brand / blurple
-------------------------------------------------------- */
-
---brand-experiment:
-#080808;
-
---brand-experiment-100:
-#e7e7e7;
-
---brand-experiment-200:
-#d0d0d0;
-
---brand-experiment-300:
-#b0b0b0;
-
---brand-experiment-400:
-#909090;
-
---brand-experiment-500:
-#080808;
-
---brand-experiment-600:
-#000000;
-
---brand-experiment-700:
-#000000;
-
---control-brand-foreground:
-#e7e7e7;
-
---primary-500-hsl:
-0 0% 4%;
-
---primary-600-hsl:
-0 0% 4%;
+    --primary-600-hsl:
+        0 0% 4%;
 }
 
-/* =========================================================
-APPLICATION SHELL
------------------
 
-Only root-level application surfaces.
-Do NOT target generic wrappers or containers.
-========================================================= */
+/* =========================================================
+   APPLICATION SHELL
+   ========================================================= */
 
 [class*="appMount_"] {
-background-color:
-#000000 !important;
+    background-color: #000000 !important;
 }
 
 [class*="app_"] {
-background-color:
-#000000 !important;
+    background-color: #000000 !important;
 }
 
 [class*="layers_"] {
-background-color:
-#000000 !important;
+    background-color: #000000 !important;
 }
 
+
 /* =========================================================
-SERVER LIST
-========================================================= */
+   SERVER LIST FOUNDATION
+   ========================================================= */
 
 [class*="guilds_"] {
-
-background-color:
-#000000 !important;
-
+    background-color: #000000 !important;
 }
 
 [class*="guilds_"] > [class*="scroller_"] {
-
-background-color:
-#000000 !important;
-
+    background-color: #000000 !important;
 }
 
-/* Server items */
+
+/* =========================================================
+   SERVER ITEMS
+   ========================================================= */
 
 [class*="guilds_"] [class*="listItem_"] {
-
-background-color:
-transparent !important;
-
+    background-color: transparent !important;
 }
 
-/* Server wrappers */
 
-[class*="guilds_"] [class*="wrapper_"] {
+/* =========================================================
+   SERVER WRAPPERS
+   ========================================================= */
 
-background-color:
-transparent !important;
+[class*="guilds_"] [class*="listItem_"] > [class*="wrapper_"] {
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    filter: none !important;
 
-transition:
-transform 0.18s ease !important;
-
+    transition:
+        transform 0.18s ease !important;
 }
 
-[class*="guilds_"] [class*="wrapper_"]:hover {
-
-background-color:
-transparent !important;
-
+[class*="guilds_"] [class*="listItem_"] > [class*="wrapper_"]:hover,
+[class*="guilds_"] [class*="listItem_"] > [class*="wrapper_"]:active {
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
 }
 
-[class*="guilds_"] [class*="wrapper_"]:active {
 
-transform:
-scale(0.97);
+/* =========================================================
+   SERVER IMAGES
+   ========================================================= */
 
+[class*="guilds_"] [class*="listItem_"] img {
+    filter: none !important;
+    opacity: 1 !important;
 }
 
-/* Server images */
 
-[class*="guilds_"] [class*="wrapper_"] img {
-
-filter:
-none !important;
-
-opacity:
-1 !important;
-
-}
-
-/* Home button */
+/* =========================================================
+   HOME BUTTON
+   ========================================================= */
 
 [class*="guilds_"] [class*="homeIcon_"] {
-
-color:
-#bdbdbd !important;
-
+    color: #bdbdbd !important;
 }
 
 [class*="guilds_"] [class*="homeIcon_"]:hover {
-
-color:
-#ffffff !important;
-
+    color: #ffffff !important;
 }
 
 [class*="guilds_"] [class*="childWrapper_"] {
-
-background:
-#080808 !important;
-
+    background: #080808 !important;
 }
 
-/* Selected server */
-
-[class*="guilds_"]
-[class*="wrapper_"][aria-selected="true"] {
-
-background:
-transparent !important;
-
-box-shadow:
-none !important;
-
-}
-
-[class*="guilds_"]
-[class*="wrapper_"][class*="selected_"] {
-
-background:
-transparent !important;
-
-box-shadow:
-none !important;
-
-}
-
-/* Server pill */
-
-[class*="guilds_"] [class*="pill_"] {
-
-background:
-transparent !important;
-
-}
 
 /* =========================================================
-SERVER SIDEBAR
---------------
+   SELECTED SERVER
+   ========================================================= */
 
-Keep the channel list and account panel separate.
-========================================================= */
+[class*="guilds_"]
+[class*="listItem_"]
+[class*="wrapper_"][aria-selected="true"] {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+[class*="guilds_"]
+[class*="listItem_"]
+[class*="wrapper_"][class*="selected_"] {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+
+/* =========================================================
+   SERVER PILL
+   ========================================================= */
+
+[class*="guilds_"] [class*="pill_"] {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+
+/* =========================================================
+   SERVER SIDEBAR
+   ========================================================= */
 
 [class*="sidebar_"] {
-
-background-color:
-#000000 !important;
-
+    background-color: #000000 !important;
 }
 
 [class*="sidebarList_"] {
-
-background-color:
-#000000 !important;
-
-border:
-none !important;
-
+    background-color: #000000 !important;
+    border: none !important;
 }
+
 
 /* =========================================================
-SERVER CHANNEL LIST
-========================================================= */
+   SERVER CHANNEL LIST
+   ========================================================= */
 
-[class*="sidebar_"]
-[class*="channels_"] {
-
-background-color:
-#000000 !important;
-
+[class*="sidebar_"] [class*="channels_"] {
+    background-color: #000000 !important;
 }
 
-/* Channel scroller */
-
-[class*="sidebar_"]
-[class*="scroller_"] {
-
-background-color:
-#000000 !important;
-
+[class*="sidebar_"] [class*="scroller_"] {
+    background-color: #000000 !important;
 }
+
 
 /* =========================================================
-SERVER HEADER
-========================================================= */
+   SERVER HEADER
+   ========================================================= */
 
-[class*="sidebar_"]
-[class*="header_"] {
-
-background-color:
-#000000 !important;
-
-box-shadow:
-none !important;
-
+[class*="sidebar_"] [class*="header_"] {
+    background-color: #000000 !important;
+    box-shadow: none !important;
 }
 
-/* =========================================================
-CHANNEL LIST ITEMS
-------------------
 
-Scoped specifically to the server sidebar.
-========================================================= */
+/* =========================================================
+   CHANNEL ITEMS
+   ========================================================= */
 
 [class*="sidebar_"]
 [class*="wrapper_"][class*="modeSelectable_"] {
-
-background:
-transparent !important;
-
+    background: transparent !important;
 }
-
-/* Channel hover */
 
 [class*="sidebar_"]
 [class*="wrapper_"][class*="modeSelectable_"]:hover {
-
-background:
-#080808 !important;
-
+    background: #080808 !important;
 }
-
-/* Channel selected */
 
 [class*="sidebar_"]
 [class*="modeSelected_"] {
-
-background:
-#0a0a0a !important;
-
+    background: #0a0a0a !important;
 }
 
 [class*="sidebar_"]
 [class*="modeSelected_"]:hover {
-
-background:
-#0d0d0d !important;
-
+    background: #0d0d0d !important;
 }
 
-/* Channel names */
+
+/* =========================================================
+   CHANNEL TEXT
+   ========================================================= */
 
 [class*="sidebar_"]
 [class*="modeSelectable_"]
 [class*="name_"] {
-
-color:
-#a8a8a8 !important;
-
+    color: #a8a8a8 !important;
 }
 
 [class*="sidebar_"]
 [class*="modeSelectable_"]:hover
 [class*="name_"] {
-
-color:
-#d0d0d0 !important;
-
+    color: #d0d0d0 !important;
 }
 
 [class*="sidebar_"]
 [class*="modeSelected_"]
 [class*="name_"] {
-
-color:
-#ffffff !important;
-
+    color: #ffffff !important;
 }
 
-/* Channel icons */
+
+/* =========================================================
+   CHANNEL ICONS
+   ========================================================= */
 
 [class*="sidebar_"]
 [class*="modeSelectable_"]
 [class*="icon_"] {
-
-color:
-#888888 !important;
-
+    color: #888888 !important;
 }
 
 [class*="sidebar_"]
 [class*="modeSelectable_"]:hover
 [class*="icon_"] {
-
-color:
-#d0d0d0 !important;
-
+    color: #d0d0d0 !important;
 }
 
+
 /* =========================================================
-CHANNEL CATEGORY HEADERS
-========================================================= */
+   CHANNEL CATEGORY HEADERS
+   ========================================================= */
 
 [class*="sidebar_"]
 [class*="container_"][class*="clickable_"] {
-
-background:
-transparent !important;
-
+    background: transparent !important;
 }
 
 [class*="sidebar_"]
 [class*="container_"][class*="clickable_"]:hover {
-
-background:
-#080808 !important;
-
+    background: #080808 !important;
 }
+
 
 /* =========================================================
-FIND / START A CONVERSATION
----------------------------
-
-One consistent shade with the DM sidebar.
-========================================================= */
+   DM SIDEBAR
+   ========================================================= */
 
 [class*="privateChannels_"] {
-
-background-color:
-#000000 !important;
-
+    background-color: #000000 !important;
 }
 
-/* Search area */
+
+/* =========================================================
+   FIND OR START A CONVERSATION
+   ========================================================= */
+
+[class*="privateChannels_"] [class*="searchBar_"] {
+    background: #080808 !important;
+    background-color: #080808 !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+
+    border-radius: 8px !important;
+
+    transition:
+        background-color 0.18s ease !important;
+}
+
+[class*="privateChannels_"] [class*="searchBar_"]:hover,
+[class*="privateChannels_"] [class*="searchBar_"]:focus,
+[class*="privateChannels_"] [class*="searchBar_"]:focus-within {
+    background: #0d0d0d !important;
+    background-color: #0d0d0d !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
 
 [class*="privateChannels_"]
-[class*="searchBar_"] {
-
-background-color:
-#080808 !important;
-
-border:
-1px solid rgba(255, 255, 255, 0.04) !important;
-
-box-shadow:
-none !important;
-
-border-radius:
-8px !important;
-
-transition:
-background-color 0.2s ease,
-border-color 0.2s ease !important;
-
+[class*="searchBar_"] > * {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
 }
-
-/* Search hover */
-
-[class*="privateChannels_"]
-[class*="searchBar_"]:hover {
-
-background-color:
-#0a0a0a !important;
-
-border-color:
-rgba(255, 255, 255, 0.07) !important;
-
-}
-
-/* Search focused */
-
-[class*="privateChannels_"]
-[class*="searchBar_"]:focus-within {
-
-background-color:
-#0a0a0a !important;
-
-border-color:
-rgba(255, 255, 255, 0.10) !important;
-
-box-shadow:
-none !important;
-
-}
-
-/* Search inner */
-
-[class*="privateChannels_"]
-[class*="searchBar_"] > div {
-
-background:
-transparent !important;
-
-}
-
-/* Search input */
 
 [class*="privateChannels_"]
 [class*="searchBar_"] input {
-
-color:
-#d0d0d0 !important;
-
-background:
-transparent !important;
-
+    background: transparent !important;
+    color: #d0d0d0 !important;
+    border: none !important;
+    outline: none !important;
 }
 
-/* Search placeholder */
+[class*="privateChannels_"]
+[class*="searchBar_"] input::placeholder {
+    color: #777777 !important;
+}
 
 [class*="privateChannels_"]
 [class*="searchBar_"]
 [class*="placeholder_"] {
-
-color:
-#666666 !important;
-
+    color: #777777 !important;
 }
-
-/* Search icon */
 
 [class*="privateChannels_"]
 [class*="searchBar_"]
 [class*="icon_"] {
-
-color:
-#888888 !important;
-
+    color: #888888 !important;
 }
 
-/* =========================================================
-DIRECT MESSAGE LIST
--------------------
 
-Prevent black text/highlight artifacts.
-========================================================= */
+/* =========================================================
+   DIRECT MESSAGE ROWS
+   ========================================================= */
 
 [class*="privateChannels_"]
 [class*="channel_"] {
-
-background:
-transparent !important;
-
-color:
-#c8c8c8 !important;
-
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
 }
-
-/* DM hover */
 
 [class*="privateChannels_"]
 [class*="channel_"]:hover {
-
-background:
-#080808 !important;
-
+    background: #080808 !important;
 }
-
-/* DM selected */
 
 [class*="privateChannels_"]
 [class*="channel_"][class*="selected_"] {
-
-background:
-#0a0a0a !important;
-
+    background: #0a0a0a !important;
 }
-
-/* DM selected hover */
 
 [class*="privateChannels_"]
 [class*="channel_"][class*="selected_"]:hover {
-
-background:
-#0d0d0d !important;
-
+    background: #0d0d0d !important;
 }
 
-/* DM names */
+
+/* =========================================================
+   DM USERNAME — NO BLACK HIGHLIGHT
+   ========================================================= */
 
 [class*="privateChannels_"]
 [class*="channel_"]
-[class*="name_"] {
-
-color:
-#c8c8c8 !important;
-
-background:
-transparent !important;
-
-}
-
+[class*="name_"],
 [class*="privateChannels_"]
-[class*="channel_"]:hover
-[class*="name_"] {
-
-color:
-#ffffff !important;
-
-background:
-transparent !important;
-
+[class*="channel_"]
+[class*="username_"],
+[class*="privateChannels_"]
+[class*="channel_"]
+[class*="displayName_"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
 }
 
 [class*="privateChannels_"]
 [class*="channel_"][class*="selected_"]
-[class*="name_"] {
-
-color:
-#ffffff !important;
-
-background:
-transparent !important;
-
-}
-
-/* DM icons */
-
+[class*="name_"],
 [class*="privateChannels_"]
-[class*="channel_"]
-[class*="icon_"] {
-
-color:
-#888888 !important;
-
-}
-
+[class*="channel_"][class*="selected_"]
+[class*="username_"],
 [class*="privateChannels_"]
-[class*="channel_"]:hover
-[class*="icon_"] {
-
-color:
-#d0d0d0 !important;
-
+[class*="channel_"][class*="selected_"]
+[class*="displayName_"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    color: #ffffff !important;
 }
+
 
 /* =========================================================
-MAIN CHAT
-========================================================= */
+   MAIN CHAT
+   ========================================================= */
 
-[class*="chat_"] {
-
-background-color:
-#000000 !important;
-
-}
-
-[class*="chatContent_"] {
-
-background-color:
-#000000 !important;
-
-}
-
-[class*="messagesWrapper_"] {
-
-background-color:
-#000000 !important;
-
-}
-
+[class*="chat_"],
+[class*="chatContent_"],
+[class*="messagesWrapper_"],
 [class*="themedBackground_"] {
-
-background-color:
-#000000 !important;
-
+    background-color: #000000 !important;
 }
 
-/* Remove chat gradients */
+
+/* =========================================================
+   CHAT GRADIENTS
+   ========================================================= */
 
 [class*="chatTypingGradient_"],
 [class*="chatGradient_"] {
-
-background:
-none !important;
-
+    background: none !important;
 }
 
+
 /* =========================================================
-CHAT HEADER
-========================================================= */
+   CHAT HEADER
+   ========================================================= */
 
 [class*="chat_"]
 [class*="headerBar_"] {
-
-background:
-#000000 !important;
-
-border-bottom:
-1px solid rgba(255, 255, 255, 0.04) !important;
-
+    background: #000000 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.035) !important;
+    box-shadow: none !important;
 }
 
-/* Header text */
-
-[class*="headerBar_"]
-[class*="title_"],
-[class*="headerBar_"]
-[class*="name_"] {
-
-color:
-#e7e7e7 !important;
-
-}
 
 /* =========================================================
-MESSAGE TEXT
-========================================================= */
+   MESSAGE CONTENT
+   ========================================================= */
 
 [class*="messageContent_"],
 [class*="markup_"] {
-
-color:
-#d0d0d0 !important;
-
+    color: #d0d0d0 !important;
 }
 
 [class*="timestamp_"] {
-
-color:
-#777777 !important;
-
+    color: #777777 !important;
 }
 
 [class*="timestamp_"]:hover {
-
-color:
-#999999 !important;
-
+    color: #999999 !important;
 }
 
+
 /* =========================================================
-MESSAGE HOVER
-========================================================= */
+   MESSAGE HOVER
+   ========================================================= */
 
 [class*="message_"]:hover {
-
-background:
-rgba(255, 255, 255, 0.012) !important;
-
+    background: rgba(255, 255, 255, 0.012) !important;
 }
 
 [class*="message_"][class*="selected_"] {
-
-background:
-rgba(255, 255, 255, 0.025) !important;
-
+    background: rgba(255, 255, 255, 0.025) !important;
 }
 
+
 /* =========================================================
-MESSAGE INPUT
-========================================================= */
+   MESSAGE INPUT
+   ========================================================= */
 
 [class*="channelTextArea_"] {
-
-background:
-#080808 !important;
-
-border:
-1px solid rgba(255, 255, 255, 0.04) !important;
-
-border-radius:
-10px !important;
-
+    background: #080808 !important;
+    border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
 }
 
 [class*="scrollableContainer_"] {
-
-background:
-#080808 !important;
-
+    background: #080808 !important;
 }
 
 [class*="channelTextArea_"]:hover {
-
-border-color:
-rgba(255, 255, 255, 0.07) !important;
-
+    border-color: rgba(255, 255, 255, 0.07) !important;
 }
 
 [class*="channelTextArea_"]:focus-within {
-
-border-color:
-rgba(255, 255, 255, 0.10) !important;
-
-box-shadow:
-none !important;
-
+    border-color: rgba(255, 255, 255, 0.10) !important;
+    box-shadow: none !important;
 }
-
-/* Placeholder */
 
 [class*="channelTextArea_"]
 [class*="placeholder_"] {
-
-color:
-#666666 !important;
-
+    color: #666666 !important;
 }
+
 
 /* =========================================================
-MEMBER LIST
-========================================================= */
+   MEMBER LIST
+   ========================================================= */
 
-[class*="membersWrap_"] {
-
-background:
-#000000 !important;
-
-}
-
+[class*="membersWrap_"],
 [class*="members_"] {
-
-background:
-#000000 !important;
-
+    background: #000000 !important;
 }
 
 [class*="member_"] {
-
-background:
-transparent !important;
-
+    background: transparent !important;
 }
 
-/* Member names */
+[class*="member_"]:hover {
+    background: #080808 !important;
+}
 
 [class*="member_"]
 [class*="username_"],
 [class*="member_"]
 [class*="displayName_"] {
-
-color:
-#bdbdbd !important;
-
+    color: #bdbdbd !important;
 }
 
-[class*="member_"]: hover
-
+[class*="member_"]:hover
 [class*="username_"],
 [class*="member_"]:hover
 [class*="displayName_"] {
-
-color:
-#d0d0d0 !important;
-
+    color: #d0d0d0 !important;
 }
 
+
 /* =========================================================
-TOP NOTICES / ANNOUNCEMENTS
-========================================================= */
+   TOP NOTICES / ANNOUNCEMENTS
+   ========================================================= */
 
 [class*="notice_"] {
-
-background:
-#080808 !important;
-
-color:
-#e7e7e7 !important;
-
-border-color:
-rgba(255, 255, 255, 0.05) !important;
-
+    background: #080808 !important;
+    color: #e7e7e7 !important;
+    border-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 [class*="notice_"] * {
-
-color:
-#e7e7e7 !important;
-
+    color: #e7e7e7 !important;
 }
 
 [class*="notice_"] button {
-
-background:
-#111111 !important;
-
-color:
-#d0d0d0 !important;
-
-border:
-1px solid rgba(255, 255, 255, 0.05) !important;
-
+    background: #111111 !important;
+    color: #d0d0d0 !important;
+    border: none !important;
 }
 
 [class*="notice_"] button:hover {
-
-background:
-#181818 !important;
-
-color:
-#ffffff !important;
-
+    background: #181818 !important;
+    color: #ffffff !important;
 }
 
+
 /* =========================================================
-NEW MESSAGES / JUMP BARS
-========================================================= */
+   NEW MESSAGES / JUMP BARS
+   ========================================================= */
 
 [class*="newMessagesBar_"],
 [class*="jumpToPresentBar_"] {
-
-background:
-#0a0a0a !important;
-
-color:
-#d0d0d0 !important;
-
-border:
-1px solid rgba(255, 255, 255, 0.04) !important;
-
+    background: #080808 !important;
+    color: #d0d0d0 !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 [class*="newMessagesBar_"] *,
 [class*="jumpToPresentBar_"] * {
-
-color:
-#d0d0d0 !important;
-
+    color: #d0d0d0 !important;
 }
 
-[class*="newMessagesBar_"]: hover,
-
+[class*="newMessagesBar_"]:hover,
 [class*="jumpToPresentBar_"]:hover {
-
-background:
-#111111 !important;
-
+    background: #0d0d0d !important;
 }
+
 
 /* =========================================================
-SEARCH
-========================================================= */
-
-[class*="searchBar_"] {
-
-background:
-#080808 !important;
-
-}
+   GLOBAL SEARCH
+   ========================================================= */
 
 [class*="searchBar_"] input {
-
-color:
-#d0d0d0 !important;
-
-background:
-transparent !important;
-
+    background: transparent !important;
+    color: #d0d0d0 !important;
 }
 
 [class*="searchBar_"] input::placeholder {
-
-color:
-#666666 !important;
-
+    color: #666666 !important;
 }
 
 [class*="searchResultsWrap_"] {
-
-background:
-#000000 !important;
-
+    background: #000000 !important;
 }
 
 [class*="searchResult_"] {
-
-background:
-#000000 !important;
-
-border:
-none !important;
-
+    background: #000000 !important;
+    border: none !important;
 }
 
 [class*="searchToken_"] {
-
-background:
-#111111 !important;
-
+    background: #111111 !important;
 }
 
+
 /* =========================================================
-LINKS
-========================================================= */
+   LINKS
+   ========================================================= */
 
 a:not([class*="vc-"]):not([class*="bd-"]),
 [class*="anchor_"]:not([class*="vc-"]):not([class*="bd-"]) {
-
-color:
-#c8c8c8 !important;
-
+    color: #c8c8c8 !important;
 }
 
 a:not([class*="vc-"]):not([class*="bd-"]):hover,
 [class*="anchor_"]:not([class*="vc-"]):not([class*="bd-"]):hover {
-
-color:
-#e7e7e7 !important;
-
+    color: #e7e7e7 !important;
 }
 
+
 /* =========================================================
-MENUS
-========================================================= */
+   MENUS
+   ========================================================= */
 
 [class*="menu_"] {
+    background: rgba(5, 5, 5, 0.97) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
 
-background:
-rgba(5, 5, 5, 0.97) !important;
-
-border:
-1px solid rgba(255, 255, 255, 0.05) !important;
-
-box-shadow:
-0 8px 30px rgba(0, 0, 0, 0.5) !important;
-
-backdrop-filter:
-blur(var(--SL-blur));
-
--webkit-backdrop-filter:
-blur(var(--SL-blur));
-
+    backdrop-filter: blur(var(--SL-blur));
+    -webkit-backdrop-filter: blur(var(--SL-blur));
 }
 
 [class*="menu_"]
 [class*="item_"] {
-
-color:
-#bdbdbd !important;
-
+    color: #bdbdbd !important;
 }
 
 [class*="menu_"]
 [class*="item_"]:hover {
-
-background:
-#111111 !important;
-
-color:
-#e7e7e7 !important;
-
+    background: #111111 !important;
+    color: #e7e7e7 !important;
 }
 
+
 /* =========================================================
-POPOUTS
-========================================================= */
+   POPOUTS
+   ========================================================= */
 
 [class*="popover_"],
 [class*="popout_"] {
+    background: rgba(5, 5, 5, 0.97) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
 
-background:
-rgba(5, 5, 5, 0.97) !important;
-
-border:
-1px solid rgba(255, 255, 255, 0.05) !important;
-
-backdrop-filter:
-blur(var(--SL-blur));
-
--webkit-backdrop-filter:
-blur(var(--SL-blur));
-
+    backdrop-filter: blur(var(--SL-blur));
+    -webkit-backdrop-filter: blur(var(--SL-blur));
 }
 
+
 /* =========================================================
-TOOLTIP
-========================================================= */
+   TOOLTIP
+   ========================================================= */
 
 [class*="tooltip_"] {
-
-background:
-#080808 !important;
-
-border:
-1px solid rgba(255, 255, 255, 0.05) !important;
-
+    background: #080808 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: none !important;
 }
 
+
 /* =========================================================
-MODALS
-========================================================= */
+   MODALS
+   ========================================================= */
 
 [class*="modal_"] {
-
-background:
-#080808 !important;
-
+    background: #080808 !important;
 }
 
 [class*="backdrop_"],
 [class*="scrim_"] {
-
-background:
-rgba(0, 0, 0, 0.72) !important;
-
+    background: rgba(0, 0, 0, 0.72) !important;
 }
 
-[class*="modal_"]
-[class*="header_"] {
-
-background:
-#080808 !important;
-
-}
 
 /* =========================================================
-SETTINGS
-========================================================= */
+   FULL PROFILE VIEW
+   ========================================================= */
+
+/*
+   IMPORTANT:
+   Do not force the outer profile modal to black.
+   Discord uses this outer layer as the modal shell.
+   Only the actual profile surface is normalized.
+*/
+
+[class*="userProfileModalOuter"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+[class*="userProfileModalInner"],
+[class*="userProfileOuter"] {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    background-image: none !important;
+
+    opacity: 1 !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+}
+
+[class*="userProfileModalInner"]
+[class*="body_"],
+[class*="userProfileOuter"]
+[class*="body_"] {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
 
 [class*="standardSidebarView_"],
 [class*="sidebarRegionScroller_"],
 [class*="contentRegion_"],
 [class*="contentRegionScroller_"] {
-
-background:
-#000000 !important;
-
+    background: #000000 !important;
 }
-
-/* Settings cards */
 
 [class*="cardPrimary_"],
 [class*="card_"] {
-
-background:
-#080808 !important;
-
-border-color:
-rgba(255, 255, 255, 0.04) !important;
-
+    background: #080808 !important;
+    border-color: rgba(255, 255, 255, 0.04) !important;
 }
 
-/* =========================================================
-ACCOUNT / VOICE PANEL
----------------------
 
-Keep this as its own surface.
-This prevents the black "floating box" effect
-caused by forcing the entire sidebar into one color.
-========================================================= */
+/* =========================================================
+   ACCOUNT / VOICE PANEL
+   ========================================================= */
 
 [class*="panels_"] {
-
-background:
-#080808 !important;
-
-border:
-none !important;
-
+    background: #080808 !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 [class*="activityPanel_"] {
-
-background:
-#080808 !important;
-
-border:
-none !important;
-
+    background: #080808 !important;
+    border: none !important;
 }
-
-/* Account panel text */
 
 [class*="panels_"]
 [class*="username_"],
 [class*="panels_"]
 [class*="nameTag_"] {
-
-color:
-#d0d0d0 !important;
-
+    color: #d0d0d0 !important;
 }
+
 
 /* =========================================================
-FRIENDS / HOME
-========================================================= */
+   FRIENDS / HOME
+   ========================================================= */
 
-[class*="homeWrapper_"] {
-
-background:
-#000000 !important;
-
-}
-
-[class*="peopleColumn_"] {
-
-background:
-#000000 !important;
-
-}
-
-[class*="peopleList_"] {
-
-background:
-#000000 !important;
-
-}
-
+[class*="homeWrapper_"],
+[class*="peopleColumn_"],
+[class*="peopleList_"],
 [class*="nowPlayingColumn_"] {
-
-background:
-#000000 !important;
-
+    background: #000000 !important;
 }
 
-/* Friends tabs */
-
-[class*="tabBar_"] {
-
-background:
-transparent !important;
-
-}
-
-[class*="tabBarItem_"] {
-
-color:
-#a8a8a8 !important;
-
-}
-
-[class*="tabBarItem_"]:hover {
-
-color:
-#d0d0d0 !important;
-
-}
-
-[class*="tabBarItem_"][class*="selected_"] {
-
-background:
-#080808 !important;
-
-color:
-#e7e7e7 !important;
-
-}
 
 /* =========================================================
-EMOJI / STICKERS
-========================================================= */
+   HOME TABS
+   ========================================================= */
 
-[class*="contentWrapper_"] {
+/*
+   Do not use broad tabBarItem rules here.
+   They can incorrectly affect Quests and other Home UI.
+*/
 
-background:
-#080808 !important;
-
+[class*="homeWrapper_"]
+[class*="tabBarItem_"],
+[class*="homeWrapper_"]
+[role="tab"] {
+    background: transparent !important;
+    box-shadow: none !important;
 }
 
+[class*="homeWrapper_"]
+[class*="tabBarItem_"]:hover,
+[class*="homeWrapper_"]
+[role="tab"]:hover {
+    background: #080808 !important;
+    box-shadow: none !important;
+}
+
+[class*="homeWrapper_"]
+[class*="tabBarItem_"][class*="selected_"],
+[class*="homeWrapper_"]
+[role="tab"][aria-selected="true"] {
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #e7e7e7 !important;
+}
+
+
+/* =========================================================
+   EMOJI / STICKERS
+   ========================================================= */
+
+[class*="contentWrapper_"],
 [class*="emojiPicker_"] {
-
-background:
-#080808 !important;
-
+    background: #080808 !important;
 }
 
+
 /* =========================================================
-MESSAGE POPOUT
-========================================================= */
+   MESSAGE POPOUT
+   ========================================================= */
 
 [class*="messagesPopoutWrap_"] {
-
-background:
-#080808 !important;
-
-border:
-1px solid rgba(255, 255, 255, 0.05) !important;
-
+    background: #080808 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 
 [class*="messagesPopoutWrap_"]
 [class*="header_"] {
-
-background:
-transparent !important;
-
+    background: transparent !important;
 }
 
+
 /* =========================================================
-SPOILERS
-========================================================= */
+   SPOILERS
+   ========================================================= */
 
 [class*="spoilerContent_"][class*="hidden_"],
 [class*="spoilerContainer_"] {
-
-background:
-#111111 !important;
-
+    background: #111111 !important;
 }
 
+
 /* =========================================================
-THREADS
-========================================================= */
+   THREADS
+   ========================================================= */
 
 [class*="container_"][class*="thread_"] {
-
-background:
-#080808 !important;
-
+    background: #080808 !important;
 }
 
+
 /* =========================================================
-SERVER FOLDERS
-========================================================= */
+   SERVER FOLDERS
+   ========================================================= */
 
 [class*="folderGroupBackground_"] {
-
-background:
-#080808 !important;
-
-border:
-none !important;
-
+    background: #080808 !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 [class*="groupContainer_"] {
-
-background:
-transparent !important;
-
-border:
-none !important;
-
+    background: transparent !important;
+    border: none !important;
 }
 
-/* =========================================================
-VENCORD
--------
 
-Surface normalization only.
-Do NOT globally recolor Vencord icons/text.
-========================================================= */
+/* =========================================================
+   VENCORD
+   ========================================================= */
 
 .vc-card-normal,
 .vc-card-base,
 .vc-addon-card {
-
-background:
-#080808 !important;
-
-border-color:
-rgba(255, 255, 255, 0.04) !important;
-
+    background: #080808 !important;
+    border-color: rgba(255, 255, 255, 0.04) !important;
 }
 
 .vc-btn-primary {
-
-border-color:
-rgba(255, 255, 255, 0.05) !important;
-
+    border-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 .vc-settings-quickActions-pill:hover {
-
-background:
-#0d0d0d !important;
-
+    background: #0d0d0d !important;
 }
 
 .vc-card-warning {
-
-border-color:
-#444444 !important;
-
+    border-color: #444444 !important;
 }
 
+
 /* =========================================================
-BETTERDISCORD
-========================================================= */
+   BETTERDISCORD
+   ========================================================= */
 
 .bd-addon-list .bd-addon-card,
 .bd-addon-list .bd-addon-header,
 .bd-store-card {
-
-background:
-#080808 !important;
-
-border-color:
-rgba(255, 255, 255, 0.04) !important;
-
-color:
-#d0d0d0 !important;
-
+    background: #080808 !important;
+    border-color: rgba(255, 255, 255, 0.04) !important;
+    color: #d0d0d0 !important;
 }
 
+
 /* =========================================================
-CODE EDITOR
-========================================================= */
+   CODE EDITOR
+   ========================================================= */
 
 .monaco-editor,
 .monaco-editor-background,
 .monaco-editor .margin,
 .monaco-editor .sticky-widget {
-
-background:
-#000000 !important;
-
+    background: #000000 !important;
 }
 
 #floating-editor-window {
-
-background:
-#080808 !important;
-
+    background: #080808 !important;
 }
 
+
 /* =========================================================
-AUTOCOMPLETE
-========================================================= */
+   AUTOCOMPLETE
+   ========================================================= */
 
 [class*="autocomplete_"] {
+    background: #080808 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
 
-background:
-#080808 !important;
-
-border:
-1px solid rgba(255, 255, 255, 0.05) !important;
-
-backdrop-filter:
-blur(var(--SL-blur));
-
--webkit-backdrop-filter:
-blur(var(--SL-blur));
-
+    backdrop-filter: blur(var(--SL-blur));
+    -webkit-backdrop-filter: blur(var(--SL-blur));
 }
 
+
 /* =========================================================
-STATUS
-========================================================= */
+   STATUS
+   ========================================================= */
 
 [class*="notDetected_"] {
-
-background:
-#080808 !important;
-
+    background: #080808 !important;
 }
 
+
 /* =========================================================
-NATIVE SELECTION VARIABLES
-========================================================= */
+   FINAL SAFE FOCUS RESET
+   ========================================================= */
 
-.theme-dark,
-.theme-light {
-
---background-modifier-selected:
-rgba(255, 255, 255, 0.05);
-
---background-modifier-hover:
-rgba(255, 255, 255, 0.025);
-
+[class*="channel_"]:focus,
+[class*="channel_"]:focus-visible,
+[class*="link_"]:focus,
+[class*="link_"]:focus-visible {
+    outline: none !important;
 }
 
+
 /* =========================================================
-END PITCHBLACK BASE
-========================================================= */
+   END PITCHBLACK BASE
+   ========================================================= */
