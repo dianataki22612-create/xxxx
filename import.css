@@ -1,9 +1,10 @@
 @charset "UTF-8";
 
 /* =========================================================
-   PITCH BLACK / SLEEKCORD
-   Discord-native UI = monochrome
-   Vencord / BetterDiscord plugin UI = preserve native colors
+   PITCHBLACK — IMPORT / BASE LAYER
+   True black Discord UI
+   Discord native UI = monochrome
+   Vencord / BetterDiscord plugin colors = preserved
    ========================================================= */
 
 
@@ -12,115 +13,110 @@
    ========================================================= */
 
 :root {
-  --font-primary: var(--SL-font);
-  --font-code: var(--SL-code);
+  --font-primary: var(--SL-font, "Nunito", sans-serif);
+  --font-code: var(--SL-code, "JetBrains Mono", monospace);
 
-  --SL-opacity: 100%;
-  --SL-font: "Nunito", sans-serif;
-  --SL-code: "Jetbrains Mono", monospace;
-
+  /* Main surfaces */
   --SL-mainCol: #000000;
   --SL-secCol: #080808;
+  --SL-surface-1: #080808;
+  --SL-surface-2: #0a0a0a;
+  --SL-surface-3: #0d0d0d;
+  --SL-surface-4: #111111;
+
+  /* Text */
+  --SL-txtCol: #d0d0d0;
+  --SL-txtStrong: #e7e7e7;
+  --SL-txtMuted: #888888;
+  --SL-txtFaint: #666666;
+
+  /* Icons */
+  --SL-icon: #bdbdbd;
+  --SL-iconMuted: #888888;
+
+  /* Borders */
+  --SL-border: rgba(255, 255, 255, 0.06);
+  --SL-borderSoft: rgba(255, 255, 255, 0.04);
+  --SL-borderStrong: rgba(255, 255, 255, 0.10);
+
+  /* Accent */
   --SL-accentCol: #000000;
 
-  --SL-gradCol1: rgba(0, 0, 0, 0.3);
-  --SL-gradCol2: rgba(0, 0, 0, 0.3);
-
+  /* Blur */
   --SL-blur: 15px;
-  --SL-spoiler: 20px;
 
+  /* Message bar */
+  --SL-msgBar: #0a0a0a;
+
+  /* Links */
+  --SL-linkCol: #c8c8c8;
+
+  /* Mentions */
+  --SL-mentionCol: #d0d0d0;
+  --SL-mentionColBg: rgba(255, 255, 255, 0.035);
+
+  /* Compatibility */
+  --SL-opacity: 100%;
+  --SL-spoiler: 20px;
   --SL-profileCol: transparent;
 
-  --SL-mentionCol: #d0d0d0;
-
-  --SL-txtCol: #d0d0d0;
-  --SL-linkCol: #c8c8c8;
-  --SL-icon: #bdbdbd;
-
-  --SL-msgBar: #0a0a0a;
+  /* Legacy variables used by SleekCord */
+  --SL-gradCol1: rgba(0, 0, 0, 0.3);
+  --SL-gradCol2: rgba(0, 0, 0, 0.3);
 
   --SL-mainCol-light: #000000;
   --SL-secCol-light: #080808;
   --SL-accentCol-light: #000000;
-
   --SL-profileCol-light: transparent;
-
   --SL-mentionCol-light: #d0d0d0;
-
   --SL-txtCol-light: #d0d0d0;
   --SL-linkCol-light: #c8c8c8;
   --SL-icon-light: #bdbdbd;
-
   --SL-msgBar-light: #0a0a0a;
-
-  --SL-accentA: rgba(255, 255, 255, 0.025);
-  --SL-accentB: rgba(255, 255, 255, 0.045);
-  --SL-accentC: rgba(255, 255, 255, 0.07);
-
-  --SL-accentA-light: rgba(255, 255, 255, 0.025);
-  --SL-accentB-light: rgba(255, 255, 255, 0.045);
-  --SL-accentC-light: rgba(255, 255, 255, 0.07);
-
-  --SL-mentionColBg: rgba(255, 255, 255, 0.035);
-  --SL-mentionColBg-light: rgba(255, 255, 255, 0.035);
-
-  --SL-grad: linear-gradient(
-    45deg,
-    var(--SL-gradCol1),
-    var(--SL-gradCol2),
-    var(--SL-gradCol1),
-    var(--SL-gradCol2)
-  );
 }
 
 
 /* =========================================================
-   SELECTION
-   ========================================================= */
-
-::selection {
-  background: #222222;
-  color: #d0d0d0 !important;
-}
-
-
-/* =========================================================
-   ROOT
+   GLOBAL ROOT
    ========================================================= */
 
 html,
 body,
 #app-mount {
   background: #000000 !important;
+  color: #d0d0d0 !important;
 }
 
 body {
+  margin: 0;
+  font-family: var(--font-primary);
   background: #000000 !important;
-  color: #d0d0d0;
+}
+
+::selection {
+  background: #222222 !important;
+  color: #e7e7e7 !important;
 }
 
 
 /* =========================================================
-   DISCORD GLOBAL VARIABLES
-   IMPORTANT:
-   Do NOT force Discord brand variables to white.
-   This was causing hover states, mentions, buttons,
-   Discord home icon and other native UI to become white.
+   DISCORD GLOBAL COLOR VARIABLES
+   Normalize Discord's native blue / blurple colors.
    ========================================================= */
 
 .theme-dark,
 .theme-light {
 
+  /* Main backgrounds */
   --background-dark-base: #000000;
-  --background-base-lower: #000000;
   --background-base-lowest: #000000;
-
-  --__header-bar-background: #000000;
-
-  --chat-background-default: #000000;
-
+  --background-base-lower: #000000;
   --background-base-low: #000000;
 
+  /* Chat */
+  --chat-background-default: #000000;
+
+  /* Surfaces */
   --background-mod-normal: #080808;
   --background-mod-strong: #0a0a0a;
   --background-mod-subtle: #050505;
@@ -130,54 +126,92 @@ body {
   --background-surface-higher: #0d0d0d;
   --background-surface-highest: #111111;
 
+  /* Cards / inputs */
   --card-background-default: #080808;
   --input-background-default: #080808;
 
+  /* Interactive surfaces */
   --interactive-background-selected: #0a0a0a;
   --interactive-background-active: #080808;
   --interactive-background-hover: #0d0d0d;
 
+  --background-modifier-hover: rgba(255, 255, 255, 0.025);
+  --background-modifier-active: rgba(255, 255, 255, 0.04);
+  --background-modifier-selected: rgba(255, 255, 255, 0.05);
+  --background-modifier-accent: rgba(255, 255, 255, 0.06);
+
+  /* Floating */
+  --background-floating: #080808;
+  --background-nested-floating: #080808;
+
+  /* Controls */
   --control-overlay-secondary-background-default: #080808;
   --control-secondary-background-default: #080808;
-
-  --modal-background: #080808;
-
-  --text-default: #d0d0d0;
-  --text-strong: #d0d0d0;
-  --text-subtle: #888888;
-
-  --text-link: #c8c8c8;
-
-  --icon-subtle: #888888;
-  --icon-strong: #bdbdbd;
-
-  --mention-foreground: #d0d0d0;
-  --mention-background: rgba(255, 255, 255, 0.035);
-
-  --message-mentioned-background-default: rgba(255, 255, 255, 0.025);
-  --message-mentioned-background-hover: rgba(255, 255, 255, 0.04);
-
-  --border-normal: rgba(255, 255, 255, 0.06);
+  --control-secondary-background-hover: #111111;
 
   --control-primary-background-default: #0a0a0a;
   --control-primary-background-hover: #111111;
 
-  --control-secondary-background-default: #080808;
-  --control-secondary-background-hover: #111111;
+  /* Modal */
+  --modal-background: #080808;
 
+  /* Header */
+  --__header-bar-background: #000000;
+  --header-primary: #e7e7e7;
+  --header-secondary: #999999;
+
+  /* Text */
+  --text-default: #d0d0d0;
+  --text-strong: #e7e7e7;
+  --text-subtle: #888888;
+  --text-muted: #777777;
+
+  /* Links */
+  --text-link: #c8c8c8;
+  --text-brand: #d0d0d0;
+
+  /* Icons */
+  --icon-subtle: #888888;
+  --icon-strong: #bdbdbd;
+
+  /* Mentions */
+  --mention-foreground: #d0d0d0;
+  --mention-background: rgba(255, 255, 255, 0.035);
+
+  /* Messages */
+  --message-mentioned-background-default: rgba(255, 255, 255, 0.025);
+  --message-mentioned-background-hover: rgba(255, 255, 255, 0.04);
+
+  /* Borders */
+  --border-normal: rgba(255, 255, 255, 0.06);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+
+  /* Brand / blurple normalization */
+  --brand-experiment: #080808;
+  --brand-experiment-100: #e7e7e7;
+  --brand-experiment-200: #d0d0d0;
+  --brand-experiment-300: #b0b0b0;
+  --brand-experiment-400: #909090;
+  --brand-experiment-500: #080808;
+  --brand-experiment-600: #000000;
+  --brand-experiment-700: #000000;
+
+  --control-brand-foreground: #e7e7e7;
+
+  --primary-500-hsl: 0 0% 4%;
   --primary-600-hsl: 0 0% 4%;
 }
 
 
 /* =========================================================
-   MAIN APPLICATION
+   APPLICATION SHELL
    ========================================================= */
 
-.appMount__51fd7,
-.app__160d8,
-.bg__960e4,
-.layers__960e4,
-.layer__960e4 {
+[class*="appMount_"],
+[class*="app_"],
+[class*="bg_"],
+[class*="layers_"],
+[class*="layer_"] {
   background: #000000 !important;
 }
 
@@ -194,87 +228,115 @@ body {
   background: #000000 !important;
 }
 
-/*
-   IMPORTANT:
-   Do NOT globally color .icon_, .childContainer_,
-   .guildIcon_ or every SVG.
 
-   Those rules were responsible for:
-   - Discord home icon turning white
-   - server icons turning white
-   - plugin icons losing their colors
-   - server icons changing color on hover
-*/
-
+/* Server item animation only */
 [class*="guilds_"] [class*="wrapper_"] {
   transition:
-    transform 0.2s ease,
-    background-color 0.2s ease !important;
+    transform 0.18s ease,
+    background-color 0.18s ease !important;
 }
 
 [class*="guilds_"] [class*="wrapper_"]:hover {
-  transform: scale(1.05);
+  background: transparent !important;
 }
 
 [class*="guilds_"] [class*="wrapper_"]:active {
-  transform: scale(0.96);
+  transform: scale(0.97);
 }
 
 
-/* =========================================================
-   DISCORD HOME ICON
-   Keep Discord icon's native monochrome state.
-   Never force it to pure white on hover.
-   ========================================================= */
+/* Keep real server images untouched */
+[class*="guilds_"] [class*="wrapper_"] img {
+  filter: none !important;
+  opacity: 1 !important;
+}
 
+
+/* Home icon */
 [class*="homeIcon_"],
 [class*="childWrapper_"] {
   transition:
-    color 0.2s ease,
-    background-color 0.2s ease,
-    transform 0.2s ease !important;
+    color 0.18s ease,
+    background-color 0.18s ease !important;
 }
 
-[class*="homeIcon_"]:hover,
-[class*="childWrapper_"]:hover {
+[class*="homeIcon_"] {
   color: #bdbdbd !important;
 }
 
-[class*="homeIcon_"] svg,
-[class*="childWrapper_"] svg {
-  transition: color 0.2s ease !important;
+[class*="homeIcon_"]:hover {
+  color: #e7e7e7 !important;
+}
+
+[class*="childWrapper_"] {
+  background: #080808 !important;
+}
+
+
+/* Remove native blue selected server background */
+[class*="guilds_"] [class*="wrapper_"][aria-selected="true"],
+[class*="guilds_"] [class*="wrapper_"][class*="selected_"] {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+
+/* Server indicator */
+[class*="guilds_"] [class*="pill_"] {
+  background: transparent !important;
 }
 
 
 /* =========================================================
-   CHANNEL SIDEBAR
+   CHANNEL / DM SIDEBAR
    ========================================================= */
 
-.container__2637a,
-.sidebarList__5e434,
-.sidebar__5e434,
-.privateChannels_e6b769,
-.scroller__99e7c,
-.container__133bf,
-.tabBody__133bf {
+[class*="sidebar_"],
+[class*="sidebarList_"],
+[class*="container_"][class*="container_"],
+[class*="privateChannels_"] {
   background: #000000 !important;
 }
 
-.sidebarList__5e434 {
+[class*="sidebarList_"] {
   border: none !important;
 }
 
-.sidebar__5e434:after {
-  background: none !important;
-}
-
-.privateChannels_e6b769 {
+[class*="privateChannels_"] {
   background: #000000 !important;
 }
 
 
 /* =========================================================
-   CHANNEL TEXT
+   FIND OR START A CONVERSATION
+   ========================================================= */
+
+[class*="privateChannels_"] [class*="searchBar_"] {
+  background: #080808 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+[class*="privateChannels_"] [class*="searchBar_"] > div {
+  background: transparent !important;
+}
+
+[class*="privateChannels_"] [class*="searchBar_"]:hover {
+  background: #0a0a0a !important;
+}
+
+[class*="privateChannels_"] [class*="searchBar_"] input,
+[class*="privateChannels_"] [class*="searchBar_"] [class*="placeholder_"] {
+  color: #d0d0d0 !important;
+}
+
+[class*="privateChannels_"] [class*="searchBar_"] [class*="icon_"] {
+  color: #999999 !important;
+}
+
+
+/* =========================================================
+   CHANNEL LIST
    ========================================================= */
 
 [class*="channel_"] [class*="name_"],
@@ -282,57 +344,39 @@ body {
 [class*="link_"] [class*="name_"],
 [class*="link_"] [class*="icon_"] {
   color: #a8a8a8 !important;
-  transition:
-    color 0.2s ease,
-    text-shadow 0.2s ease !important;
 }
 
 [class*="channel_"]:hover [class*="name_"],
 [class*="channel_"]:hover [class*="icon_"],
-[class*="wrapper_"]:hover [class*="link_"] [class*="name_"],
-[class*="wrapper_"]:hover [class*="link_"] [class*="icon_"] {
-  color: #c8c8c8 !important;
-}
-
-[class*="modeSelected"] [class*="link_"] [class*="name_"],
-[class*="modeSelected"] [class*="link_"] [class*="icon_"] {
+[class*="wrapper_"]:hover > [class*="link_"] [class*="name_"],
+[class*="wrapper_"]:hover > [class*="link_"] [class*="icon_"] {
   color: #d0d0d0 !important;
 }
 
 
-/* =========================================================
-   CHANNEL HOVER
-   ========================================================= */
-
-.wrapper__2ea32:hover .link__2ea32 {
+/* Channel hover */
+[class*="channel_"]:hover,
+[class*="wrapper_"]:hover > [class*="link_"] {
   background: #080808 !important;
 }
 
-.wrapper__2ea32:hover .link__2ea32 * {
-  color: #c8c8c8 !important;
-}
 
-.modeSelected__2ea32 .link__2ea32 {
+/* Selected channel */
+[class*="modeSelected"] > [class*="link_"],
+[class*="wrapper_"][class*="selected_"] > [class*="link_"] {
   background: #0a0a0a !important;
 }
 
-.modeSelected__2ea32 .link__2ea32:hover {
+[class*="modeSelected"] > [class*="link_"]:hover,
+[class*="wrapper_"][class*="selected_"] > [class*="link_"]:hover {
   background: #0d0d0d !important;
 }
 
 
-/* =========================================================
-   UNREAD
-   ========================================================= */
-
-.modeUnreadImportant__2ea32 .name__2ea32,
-.modeUnreadImportant__2ea32 .icon__2ea32,
-.modeUnreadImportant__2ea32 .actionIcon_c69b6d {
+/* Unread */
+[class*="unreadImportant_"] [class*="name_"],
+[class*="unreadImportant_"] [class*="icon_"] {
   color: #d0d0d0 !important;
-}
-
-.unreadImportant__2ea32 {
-  background: #bdbdbd !important;
 }
 
 
@@ -340,32 +384,92 @@ body {
    MAIN CHAT
    ========================================================= */
 
-.chat_f75fb0,
-.chatContent_f75fb0,
-.content_f75fb0,
+[class*="chat_"],
 [class*="chatContent_"],
+[class*="content_"][class*="content_"],
 [class*="messagesWrapper_"] {
   background: #000000 !important;
 }
 
-.themedBackground__74017 {
+[class*="themedBackground_"] {
   background: #000000 !important;
 }
 
-.chatTypingGradientAtBottom__36d07,
-.chatTypingGradientNotAtBottom__36d07,
-.chatGradient__36d07 {
+
+/* Remove unwanted chat gradients */
+[class*="chatTypingGradient_"],
+[class*="chatGradient_"] {
   background: none !important;
 }
 
 
 /* =========================================================
-   NORMAL DISCORD TEXT
+   TOP HEADER / HEADER BARS
+   ========================================================= */
+
+/* Discord header bar */
+[class*="headerBar_"],
+[class*="titleBar_"],
+[class*="title_"][class*="themed_"],
+[class*="upperContainer_"],
+[class*="topic__"] {
+  background: #000000 !important;
+}
+
+
+/* Header borders */
+[class*="headerBar_"],
+[class*="titleBar_"] {
+  border-bottom-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+
+/* Header text */
+[class*="headerBar_"] [class*="title_"],
+[class*="headerBar_"] [class*="name_"],
+[class*="titleBar_"] [class*="title_"] {
+  color: #e7e7e7 !important;
+}
+
+
+/* =========================================================
+   FRIENDS / HOME
+   ========================================================= */
+
+[class*="homeWrapper_"],
+[class*="peopleColumn_"],
+[class*="peopleList_"],
+[class*="nowPlayingColumn_"] {
+  background: #000000 !important;
+}
+
+
+/* Friends top navigation */
+[class*="tabBar_"],
+[class*="tabBarItem_"] {
+  background: transparent !important;
+}
+
+[class*="tabBarItem_"] {
+  color: #a8a8a8 !important;
+}
+
+[class*="tabBarItem_"]:hover {
+  color: #d0d0d0 !important;
+}
+
+[class*="tabBarItem_"][class*="selected_"] {
+  background: #080808 !important;
+  color: #e7e7e7 !important;
+}
+
+
+/* =========================================================
+   NORMAL MESSAGE TEXT
    ========================================================= */
 
 [class*="messageContent_"],
-[class*="markup_"],
-[class*="message_"] [class*="content_"] {
+[class*="markup_"] {
   color: #d0d0d0 !important;
 }
 
@@ -384,50 +488,33 @@ body {
 
 [class*="message_"]:hover {
   background: rgba(255, 255, 255, 0.012) !important;
-
-  box-shadow:
-    0 0 5px rgba(0, 0, 0, 0.9),
-    0 0 10px rgba(0, 0, 0, 0.7) !important;
-
-  transition:
-    background 0.2s ease,
-    box-shadow 0.2s ease !important;
 }
 
 [class*="message_"][class*="selected_"] {
-  background: rgba(255, 255, 255, 0.02) !important;
+  background: rgba(255, 255, 255, 0.025) !important;
 }
 
 
 /* =========================================================
    MENTIONS
-   No pure white hover.
    ========================================================= */
 
 [class*="mention_"] {
   color: #c8c8c8 !important;
   background: rgba(255, 255, 255, 0.035) !important;
-
-  transition:
-    color 0.2s ease,
-    background 0.2s ease,
-    text-shadow 0.2s ease !important;
 }
 
 [class*="mention_"]:hover {
-  color: #d0d0d0 !important;
+  color: #e0e0e0 !important;
   background: rgba(255, 255, 255, 0.055) !important;
-
-  text-shadow:
-    0 0 5px rgba(255, 255, 255, 0.12) !important;
-}
-
-.mentioned__5126c::before {
-  background: rgba(255, 255, 255, 0.35) !important;
 }
 
 [class*="mentioned_"] {
   background: rgba(255, 255, 255, 0.015) !important;
+}
+
+[class*="mentioned_"]::before {
+  background: rgba(255, 255, 255, 0.35) !important;
 }
 
 
@@ -435,42 +522,26 @@ body {
    MESSAGE INPUT
    ========================================================= */
 
-.channelTextArea_f75fb0,
-.channelTextArea__74017 {
+[class*="channelTextArea_"] {
   background: #080808 !important;
   border: 1px solid rgba(255, 255, 255, 0.04) !important;
   border-radius: 10px !important;
-
-  transition:
-    box-shadow 0.3s ease,
-    border-color 0.3s ease !important;
-}
-
-.channelTextArea__74017:not(.highlighted__74017):hover {
-  border-color: rgba(255, 255, 255, 0.08) !important;
-}
-
-.channelTextArea__74017:focus-within {
-  border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 [class*="scrollableContainer_"] {
   background: #080808 !important;
 }
 
-.placeholder__1b31f {
-  color: #666666 !important;
+[class*="channelTextArea_"]:hover {
+  border-color: rgba(255, 255, 255, 0.07) !important;
 }
 
+[class*="channelTextArea_"]:focus-within {
+  border-color: rgba(255, 255, 255, 0.10) !important;
+}
 
-/* =========================================================
-   ACCOUNT / VOICE PANEL
-   ========================================================= */
-
-.panels__5e434,
-.activityPanel__5e434 {
-  background: #080808 !important;
-  border: none !important;
+[class*="placeholder_"] {
+  color: #666666 !important;
 }
 
 
@@ -478,20 +549,14 @@ body {
    MEMBER LIST
    ========================================================= */
 
-.membersWrap_c8ffbb,
-.members_c8ffbb,
-[class*="membersWrap_"] {
+[class*="membersWrap_"],
+[class*="members_"] {
   background: #000000 !important;
 }
 
 [class*="member_"] {
   background: transparent !important;
 }
-
-
-/* =========================================================
-   MEMBER NAMES
-   ========================================================= */
 
 [class*="member_"] [class*="username_"],
 [class*="member_"] [class*="name_"],
@@ -502,7 +567,7 @@ body {
 [class*="member_"]:hover [class*="username_"],
 [class*="member_"]:hover [class*="name_"],
 [class*="member_"]:hover [class*="displayName_"] {
-  color: #c8c8c8 !important;
+  color: #d0d0d0 !important;
 }
 
 
@@ -510,34 +575,25 @@ body {
    SEARCH
    ========================================================= */
 
-.searchBar_c322aa,
-.searchBar_e6b769 {
+[class*="searchBar_"] {
   background: #080808 !important;
 }
 
-.searchResultsWrap_a98f3b {
+[class*="searchBar_"] input {
+  color: #d0d0d0 !important;
+}
+
+[class*="searchResultsWrap_"] {
   background: #000000 !important;
 }
 
-.searchResult__80bf8 {
+[class*="searchResult_"] {
   background: #000000 !important;
   border: none !important;
 }
 
-.searchToken_bd8186 {
+[class*="searchToken_"] {
   background: #111111 !important;
-}
-
-
-/* =========================================================
-   FRIENDS / HOME
-   ========================================================= */
-
-.homeWrapper__0920e,
-.nowPlayingColumn__133bf,
-[class*="peopleColumn_"],
-[class*="peopleList_"] {
-  background: #000000 !important;
 }
 
 
@@ -545,58 +601,103 @@ body {
    LINKS
    ========================================================= */
 
-a,
-[class*="anchor_"] {
-  color: #c0c0c0 !important;
-
-  transition:
-    color 0.3s ease,
-    text-shadow 0.3s ease !important;
+a:not([class*="vc-"]):not([class*="bd-"]),
+[class*="anchor_"]:not([class*="vc-"]):not([class*="bd-"]) {
+  color: #c8c8c8 !important;
 }
 
-a:hover,
-[class*="anchor_"]:hover {
-  color: #d0d0d0 !important;
-
-  animation: pb-link-glow 1.8s ease-in-out infinite;
-}
-
-@keyframes pb-link-glow {
-  0%,
-  100% {
-    text-shadow:
-      0 0 2px rgba(255, 255, 255, 0.1),
-      0 0 5px rgba(255, 255, 255, 0.05);
-  }
-
-  50% {
-    text-shadow:
-      0 0 4px rgba(255, 255, 255, 0.2),
-      0 0 9px rgba(255, 255, 255, 0.1);
-  }
+a:not([class*="vc-"]):not([class*="bd-"]):hover,
+[class*="anchor_"]:not([class*="vc-"]):not([class*="bd-"]):hover {
+  color: #e7e7e7 !important;
 }
 
 
 /* =========================================================
-   SEARCH / FRIENDS / SETTINGS
+   NOTICES / ANNOUNCEMENTS
    ========================================================= */
 
-.standardSidebarView__23e6b,
-.sidebarRegionScroller__23e6b,
-.contentRegion__23e6b,
-.contentRegionScroller__23e6b,
-.content_e9e3ed,
-.contentHeader_e9e3ed {
-  background: #000000 !important;
+/* Only actual Discord notice containers */
+[class*="notice_"] {
+  background: #080808 !important;
+  color: #e7e7e7 !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
 }
 
-.cardPrimary__73069,
-.cardPrimary__73069.editable__73069,
-.box_f8c98c,
-.row__0624f,
-.card__5cea9 {
-  background: #080808 !important;
+[class*="notice_"] * {
+  color: #e7e7e7 !important;
+}
+
+[class*="notice_"] button {
+  background: #111111 !important;
+  color: #d0d0d0 !important;
   border: none !important;
+}
+
+[class*="notice_"] button:hover {
+  background: #181818 !important;
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   NEW MESSAGES / JUMP BARS
+   ========================================================= */
+
+[class*="newMessagesBar_"],
+[class*="jumpToPresentBar_"] {
+  background: #0a0a0a !important;
+  color: #d0d0d0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.04) !important;
+}
+
+[class*="newMessagesBar_"] *,
+[class*="jumpToPresentBar_"] * {
+  color: #d0d0d0 !important;
+}
+
+[class*="newMessagesBar_"]:hover,
+[class*="jumpToPresentBar_"]:hover {
+  background: #111111 !important;
+}
+
+
+/* =========================================================
+   MARK AS READ / READ ALL STYLE
+   ========================================================= */
+
+[class*="markAsRead_"],
+[class*="readAll_"],
+[class*="readAllButton_"] {
+  background: #0a0a0a !important;
+  color: #d0d0d0 !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+[class*="markAsRead_"]:hover,
+[class*="readAll_"]:hover,
+[class*="readAllButton_"]:hover {
+  background: #111111 !important;
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   GENERIC BUTTONS
+   ========================================================= */
+
+/* Discord native buttons only */
+button:not([class*="vc-"]):not([class*="bd-"]),
+[role="button"]:not([class*="vc-"]):not([class*="bd-"]) {
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease !important;
+}
+
+
+/* Neutral buttons */
+[class*="button_"]:not([class*="vc-"]):not([class*="bd-"]) {
+  border-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 
@@ -604,43 +705,39 @@ a:hover,
    MENUS
    ========================================================= */
 
-.menu_c1e9c4 {
-  background: rgba(5, 5, 5, 0.96) !important;
+[class*="menu_"] {
+  background: rgba(5, 5, 5, 0.97) !important;
   border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
   backdrop-filter: blur(var(--SL-blur));
+  -webkit-backdrop-filter: blur(var(--SL-blur));
 }
 
-.popover_d6f39b,
-.popoverGradientWrapper_d6f39b,
-.popout__9047f {
-  background: rgba(5, 5, 5, 0.96) !important;
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
-  backdrop-filter: blur(var(--SL-blur));
+[class*="menu_"] [class*="item_"] {
+  color: #bdbdbd !important;
 }
 
-.tooltip__4e35b,
-.tooltipPrimary_c36707 {
-  background: rgba(5, 5, 5, 0.96) !important;
-  border: none !important;
-  backdrop-filter: blur(var(--SL-blur));
+[class*="menu_"] [class*="item_"]:hover {
+  background: #111111 !important;
+  color: #e7e7e7 !important;
 }
 
 
 /* =========================================================
-   MENU TEXT
-   Keep Discord menus gray instead of white.
+   POPOUTS / TOOLTIP
    ========================================================= */
 
-[class*="menu_"] [class*="item_"],
-[class*="menu_"] [class*="label_"],
-[class*="menu_"] [class*="icon_"] {
-  color: #bdbdbd !important;
+[class*="popover_"],
+[class*="popout_"] {
+  background: rgba(5, 5, 5, 0.97) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(var(--SL-blur));
+  -webkit-backdrop-filter: blur(var(--SL-blur));
 }
 
-[class*="menu_"] [class*="item_"]:hover,
-[class*="menu_"] [class*="item_"]:hover [class*="label_"],
-[class*="menu_"] [class*="item_"]:hover [class*="icon_"] {
-  color: #c8c8c8 !important;
+[class*="tooltip_"] {
+  background: #080808 !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 
 
@@ -648,74 +745,52 @@ a:hover,
    MODALS
    ========================================================= */
 
-.modalContentInner_e44912 {
+[class*="modal_"] {
   background: #080808 !important;
 }
 
-.scrim__40128 {
-  background: rgba(0, 0, 0, 0.7) !important;
+[class*="backdrop_"],
+[class*="scrim_"] {
+  background: rgba(0, 0, 0, 0.72) !important;
 }
 
-.focusLock__49fc1 > .root__49fc1 {
+[class*="modal_"] [class*="header_"] {
+  background: #080808 !important;
+}
+
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+[class*="standardSidebarView_"],
+[class*="sidebarRegionScroller_"],
+[class*="contentRegion_"],
+[class*="contentRegionScroller_"] {
+  background: #000000 !important;
+}
+
+[class*="content_"][class*="content_"] {
+  background: #000000 !important;
+}
+
+
+/* Cards */
+[class*="cardPrimary_"],
+[class*="card_"] {
+  background: #080808 !important;
+  border-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+
+/* =========================================================
+   ACCOUNT / VOICE PANEL
+   ========================================================= */
+
+[class*="panels_"],
+[class*="activityPanel_"] {
   background: #080808 !important;
   border: none !important;
-  backdrop-filter: blur(var(--SL-blur));
-}
-
-.bd-modal-root {
-  background: #080808 !important;
-}
-
-
-/* =========================================================
-   PROFILES
-   IMPORTANT:
-   NOTHING HERE CHANGES PROFILE COLORS.
-   ========================================================= */
-
-
-/* =========================================================
-   BUTTONS
-   ========================================================= */
-
-.actionButtons_cc1819,
-.button_aec7ab,
-.buttonInner_aec7ab,
-.jumpButton_ed0c8c,
-.button__201d5,
-.primary_a22cb0,
-.secondary_a22cb0 {
-  border: none !important;
-}
-
-.button_aec7ab:hover,
-.button_a22cb0:hover {
-  background: #111111 !important;
-}
-
-.button__80bf8 {
-  background: #111111 !important;
-}
-
-.button__80bf8:hover {
-  background: #181818 !important;
-}
-
-.showMoreButton__84832 {
-  background: #0a0a0a !important;
-}
-
-
-/* =========================================================
-   NOTICES
-   ========================================================= */
-
-.notice_c5cd6a {
-  background: #0a0a0a !important;
-}
-
-.button_c5cd6a:hover {
-  background: #151515 !important;
 }
 
 
@@ -723,10 +798,9 @@ a:hover,
    EMOJI / STICKERS
    ========================================================= */
 
-.contentWrapper__08434,
-div[data-popout-animating="false"] > #emoji-picker-tab-panel {
+[class*="contentWrapper_"],
+[class*="emojiPicker_"] {
   background: #080808 !important;
-  backdrop-filter: blur(var(--SL-blur));
 }
 
 
@@ -734,14 +808,12 @@ div[data-popout-animating="false"] > #emoji-picker-tab-panel {
    MESSAGE POPOUT
    ========================================================= */
 
-.messagesPopoutWrap_e8b59c {
+[class*="messagesPopoutWrap_"] {
   background: #080808 !important;
-  backdrop-filter: blur(var(--SL-blur));
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 
-.header_e8b59c,
-.messageGroupWrapper_e8b59c {
-  border: none !important;
+[class*="messagesPopoutWrap_"] [class*="header_"] {
   background: transparent !important;
 }
 
@@ -750,23 +822,9 @@ div[data-popout-animating="false"] > #emoji-picker-tab-panel {
    SPOILERS
    ========================================================= */
 
-.spoilerContent__299eb.hidden__299eb {
+[class*="spoilerContent_"][class*="hidden_"],
+[class*="spoilerContainer_"] {
   background: #111111 !important;
-
-  --__current--spoiler-content-opacity: 1;
-  --__current--spoiler-text-color: #c8c8c8;
-}
-
-.spoilerMarkdownContent__299eb.hidden__299eb {
-  filter: blur(3px);
-}
-
-.obscured__6c706.hiddenMosaicItem__6c706.hiddenSpoiler__6c706 {
-  filter: blur(var(--SL-spoiler));
-}
-
-.spoilerContainer__299eb {
-  background-color: #111111 !important;
 }
 
 
@@ -774,24 +832,8 @@ div[data-popout-animating="false"] > #emoji-picker-tab-panel {
    THREADS
    ========================================================= */
 
-.container_d9c882 {
+[class*="container_"][class*="thread_"] {
   background: #080808 !important;
-  backdrop-filter: blur(var(--SL-blur));
-}
-
-.header_d9c882,
-.container__6764b {
-  border: none !important;
-  background: transparent !important;
-}
-
-.container__6764b:hover {
-  background: #0d0d0d !important;
-}
-
-.closeIcon_d9c882,
-.threadIcon_d9c882 {
-  color: #bdbdbd;
 }
 
 
@@ -799,84 +841,53 @@ div[data-popout-animating="false"] > #emoji-picker-tab-panel {
    SERVER FOLDERS
    ========================================================= */
 
-.folderGroupBackground__48112 {
-  border: none !important;
-}
-
-.groupContainer__9d98d,
-.groupCollapsedContainer__9d98d,
-.mainCollapseableContainer__9d98d {
-  border: none !important;
-  background: transparent !important;
-}
-
-.collapseable__9d98d,
-.collapseable__217b7:active,
-.collapseable__217b7.toggled__217b7:active {
-  border: none !important;
+[class*="folderGroupBackground_"] {
   background: #080808 !important;
+  border: none !important;
+}
+
+[class*="groupContainer_"] {
+  background: transparent !important;
+  border: none !important;
 }
 
 
 /* =========================================================
    VENCORD
-   CRITICAL:
-   Do not globally recolor .vc-* icons, SVGs or buttons.
-   Vencord plugin colors remain untouched.
+   Preserve Vencord native colors.
+   Only normalize surfaces.
    ========================================================= */
 
 .vc-card-normal,
-.vc-card-base {
-  border: none !important;
+.vc-card-base,
+.vc-addon-card {
   background: #080808 !important;
+  border-color: rgba(255, 255, 255, 0.04) !important;
 }
 
+
+/* Vencord buttons */
+.vc-btn-primary {
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+
+/* Vencord quick actions */
 .vc-settings-quickActions-pill:hover {
   background: #0d0d0d !important;
 }
 
-.vc-btn-primary {
-  border: none !important;
-  background: #0a0a0a !important;
-}
 
+/* Vencord warning */
 .vc-card-warning {
-  border: 1px solid #444444;
-}
-
-.popout_a16aea {
-  border: none !important;
-  background: #080808 !important;
-  backdrop-filter: blur(var(--SL-blur));
-}
-
-.vc-addon-card {
-  border: none !important;
-  background: #080808 !important;
-}
-
-.vc-switch-container {
-  background: #111111 !important;
-}
-
-.vc-plugins-info-icon:not(:hover, :focus) {
-  color: #777777;
+  border-color: #444444 !important;
 }
 
 
-/* =========================================================
-   VENCORD PLUGIN ICON PROTECTION
-   Explicitly prevent global Discord color rules from
-   recoloring Vencord plugin icons.
-   ========================================================= */
-
-[class*="vc-"] svg,
-[class*="vc-"] svg *,
-.vc-card-normal svg,
-.vc-card-base svg,
-.vc-addon-card svg {
-  color: revert-layer !important;
-}
+/* IMPORTANT:
+   Do NOT globally recolor Vencord SVGs.
+   This prevents plugin icons from breaking.
+ */
 
 
 /* =========================================================
@@ -885,28 +896,18 @@ div[data-popout-animating="false"] > #emoji-picker-tab-panel {
 
 .bd-addon-list .bd-addon-card,
 .bd-addon-list .bd-addon-header,
-.bd-store-card,
-.bd-store-card-icon {
-  border: none !important;
+.bd-store-card {
   background: #080808 !important;
-  color: #d0d0d0;
-}
-
-.bd-button-filled.bd-button-color-brand,
-.bd-button-filled.bd-button-color-brand:hover {
-  background: #111111 !important;
+  border-color: rgba(255, 255, 255, 0.04) !important;
+  color: #d0d0d0 !important;
 }
 
 
 /* =========================================================
-   MONACO / CODE EDITOR
+   CODE EDITOR
    ========================================================= */
 
-.floating-window-content,
-#bd-editor-panel,
-.floating-window #bd-editor-controls,
-.floating-window-titlebar,
-.monaco-editor:not(.rename-box),
+.monaco-editor,
 .monaco-editor-background,
 .monaco-editor .margin,
 .monaco-editor .sticky-widget {
@@ -919,252 +920,28 @@ div[data-popout-animating="false"] > #emoji-picker-tab-panel {
 
 
 /* =========================================================
-   MISC
+   AUTOCOMPLETE
    ========================================================= */
 
-.panel__5dec7 {
-  background: #000000 !important;
-}
-
-.wrapper_a45028 {
-  border: none !important;
-}
-
-.autocomplete__13533 {
+[class*="autocomplete_"] {
   background: #080808 !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
   backdrop-filter: blur(var(--SL-blur));
 }
 
-.headerContainer__7db08 {
-  background: #000000 !important;
-}
 
-.notDetected_cc46f0 {
+/* =========================================================
+   STATUS / MISC
+   ========================================================= */
+
+[class*="notDetected_"] {
   background: #080808 !important;
 }
 
 
 /* =========================================================
-   STATUS
+   REMOVE BLUE FROM COMMON SELECTION STATES
    ========================================================= */
-
-#\:rm7\: > rect:nth-child(2),
-#svg-mask-status-idle > circle:nth-child(2),
-#svg-mask-status-dnd > rect,
-#svg-mask-status-offline > circle:nth-child(2) {
-  fill: transparent;
-}
-
-
-/* =========================================================
-   FINAL BLACK SURFACES
-   ========================================================= */
-
-.appMount__51fd7,
-.app__160d8,
-.bg__960e4,
-.layers__960e4,
-.layer__960e4,
-.guilds__5e434,
-.container__2637a,
-.sidebarList__5e434,
-.sidebar__5e434,
-.privateChannels_e6b769,
-.chat_f75fb0,
-.chatContent_f75fb0,
-.content_f75fb0,
-.membersWrap_c8ffbb,
-.members_c8ffbb,
-.searchResultsWrap_a98f3b,
-.homeWrapper__0920e,
-.nowPlayingColumn__133bf,
-.standardSidebarView__23e6b,
-.sidebarRegionScroller__23e6b,
-.contentRegion__23e6b,
-.contentRegionScroller__23e6b {
-  background-color: #000000 !important;
-}
-
-
-/* =========================================================
-   INPUTS / PANELS
-   ========================================================= */
-
-.channelTextArea_f75fb0,
-.channelTextArea__74017,
-[class*="scrollableContainer_"] {
-  background-color: #080808 !important;
-}
-
-.panels__5e434,
-.activityPanel__5e434 {
-  background-color: #080808 !important;
-}
-
-
-/* =========================================================
-   PITCHBLACK - DISCORD NATIVE BLUE OVERRIDES
-   Only targets Discord's normal UI colors.
-   Does NOT globally recolor icons or Vencord plugins.
-   ========================================================= */
-
-/* ---------------------------------------------------------
-   FIND OR START A CONVERSATION
-   --------------------------------------------------------- */
-
-.privateChannels_e6b769 [class*="searchBar_"],
-.privateChannels_e6b769 [class*="searchBar_"] > div,
-.privateChannels_e6b769 [class*="searchBar_"] > div > div {
-  background: #080808 !important;
-  background-color: #080808 !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.privateChannels_e6b769 [class*="searchBar_"]:hover {
-  background: #0a0a0a !important;
-}
-
-.privateChannels_e6b769 [class*="searchBar_"] input,
-.privateChannels_e6b769 [class*="searchBar_"] [class*="placeholder_"] {
-  color: #e7e7e7 !important;
-}
-
-.privateChannels_e6b769 [class*="searchBar_"] [class*="icon_"] {
-  color: #a0a0a0 !important;
-}
-
-
-/* ---------------------------------------------------------
-   DISCORD BLUE ANNOUNCEMENT / NOTICE BARS
-   --------------------------------------------------------- */
-
-/* Native Discord notice/announcement containers */
-[class*="notice_"],
-[class*="bar_"],
-[class*="newMessagesBar_"],
-[class*="jumpToPresentBar_"] {
-  background: #080808 !important;
-  color: #e7e7e7 !important;
-  border-color: rgba(255, 255, 255, 0.05) !important;
-}
-
-/* Text inside native notice bars */
-[class*="notice_"] *,
-[class*="bar_"] *,
-[class*="newMessagesBar_"] *,
-[class*="jumpToPresentBar_"] * {
-  color: #e7e7e7 !important;
-}
-
-/* Announcement / notice buttons */
-[class*="notice_"] button,
-[class*="bar_"] button,
-[class*="newMessagesBar_"] button,
-[class*="jumpToPresentBar_"] button {
-  background: #111111 !important;
-  color: #e7e7e7 !important;
-  border: none !important;
-}
-
-[class*="notice_"] button:hover,
-[class*="bar_"] button:hover,
-[class*="newMessagesBar_"] button:hover,
-[class*="jumpToPresentBar_"] button:hover {
-  background: #181818 !important;
-  color: #ffffff !important;
-}
-
-
-/* ---------------------------------------------------------
-   SERVER HOVER
-   Remove Discord's default blue/blurple hover effect.
-   Keeps the actual server icon/image untouched.
-   --------------------------------------------------------- */
-
-[class*="guilds_"] [class*="wrapper_"]:hover {
-  background: transparent !important;
-}
-
-[class*="guilds_"] [class*="wrapper_"]:hover [class*="childWrapper_"] {
-  background: #080808 !important;
-  color: #e7e7e7 !important;
-}
-
-/* Remove Discord's blue hover background from server buttons */
-[class*="guilds_"] [class*="wrapper_"]:hover [class*="blobContainer_"] {
-  background: transparent !important;
-}
-
-
-/* ---------------------------------------------------------
-   SELECTED / CLICKED SERVER
-   No Discord blue background.
-   Do NOT force icon color.
-   --------------------------------------------------------- */
-
-[class*="guilds_"] [class*="wrapper_"][class*="selected_"],
-[class*="guilds_"] [class*="wrapper_"][aria-selected="true"] {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-/* Selected server inner wrapper */
-[class*="guilds_"] [class*="wrapper_"][class*="selected_"] [class*="childWrapper_"],
-[class*="guilds_"] [class*="wrapper_"][aria-selected="true"] [class*="childWrapper_"] {
-  background: #080808 !important;
-  box-shadow: none !important;
-}
-
-/* Remove blue selected-server indicator */
-[class*="guilds_"] [class*="pill_"] {
-  background: transparent !important;
-}
-
-/* Keep the actual server image/icon untouched */
-[class*="guilds_"] [class*="wrapper_"] img {
-  filter: none !important;
-  opacity: 1 !important;
-}
-
-
-/* ---------------------------------------------------------
-   REMOVE DISCORD BLURPLE FROM SERVER HOME ICON
-   Only Discord's default Home icon, not Vencord icons.
-   --------------------------------------------------------- */
-
-[class*="homeIcon_"] {
-  color: #e7e7e7 !important;
-}
-
-[class*="homeIcon_"]:hover {
-  color: #ffffff !important;
-}
-
-
-/* ---------------------------------------------------------
-   DISCORD NATIVE BRAND / BLUE INTERACTIVE STATES
-   --------------------------------------------------------- */
-
-.theme-dark {
-  --brand-experiment: #080808 !important;
-  --brand-experiment-100: #e7e7e7 !important;
-  --brand-experiment-200: #d0d0d0 !important;
-  --brand-experiment-300: #b0b0b0 !important;
-  --brand-experiment-400: #909090 !important;
-  --brand-experiment-500: #080808 !important;
-  --brand-experiment-600: #000000 !important;
-  --brand-experiment-700: #000000 !important;
-
-  --control-brand-foreground: #e7e7e7 !important;
-  --text-brand: #e7e7e7 !important;
-  --text-link: #d0d0d0 !important;
-}
-
-
-/* ---------------------------------------------------------
-   REMOVE BLUE FROM COMMON DISCORD SELECTION STATES
-   --------------------------------------------------------- */
 
 [class*="selected_"]:not([class*="profile"]):not([class*="userPopout"]),
 [aria-selected="true"]:not([class*="profile"]):not([class*="userPopout"]) {
@@ -1173,153 +950,25 @@ div[data-popout-animating="false"] > #emoji-picker-tab-panel {
 }
 
 
-/* ---------------------------------------------------------
-   DISCORD NATIVE BUTTON HOVER
-   --------------------------------------------------------- */
-
-button:hover:not([class*="vc-"]):not([class*="bd-"]),
-[role="button"]:hover:not([class*="vc-"]):not([class*="bd-"]) {
-  --brand-experiment: #080808 !important;
-}
-
-
-/* ---------------------------------------------------------
-   LINKS / NORMAL DISCORD BLUE TEXT
-   Keep Vencord plugin elements excluded.
-   --------------------------------------------------------- */
-
-a:not([class*="vc-"]):not([class*="bd-"]),
-[class*="anchor_"]:not([class*="vc-"]):not([class*="bd-"]) {
-  color: #d0d0d0 !important;
-}
-
-a:not([class*="vc-"]):not([class*="bd-"]):hover,
-[class*="anchor_"]:not([class*="vc-"]):not([class*="bd-"]):hover {
-  color: #ffffff !important;
-}
-
-
-
-
 /* =========================================================
-   PITCHBLACK - REMOVE DISCORD BRAND BLUE/PURPLE
+   FINAL BLACK FOUNDATION
    ========================================================= */
 
-:root {
-    --SL-accentCol: #000000 !important;
-    --SL-linkCol: #d0d0d0 !important;
-}
-
-/* Discord normal brand/accent colors */
-.theme-dark {
-    --text-brand: #d0d0d0 !important;
-    --blurple-50: #d0d0d0 !important;
-    --primary-400: #d0d0d0 !important;
-    --control-brand-foreground: #d0d0d0 !important;
-
-    /* Black interactive states */
-    --interactive-background-hover: #080808 !important;
-    --interactive-background-selected: #080808 !important;
-    --control-primary-background-hover: #080808 !important;
-    --control-primary-background-default: #000000 !important;
-    --control-secondary-background-hover: #080808 !important;
-
-    /* Keep normal Discord text */
-    --text-default: #e7e7e7 !important;
-    --text-strong: #e7e7e7 !important;
-    --text-subtle: #a0a0a0 !important;
-    --text-link: #d0d0d0 !important;
-}
-
-/* Find or start a conversation */
-.privateChannels_e6b769 [class*="searchBar_"],
-.privateChannels_e6b769 [class*="searchBar_"] *,
-[class*="searchBar_"] [class*="inner_"] {
-    background: #080808 !important;
-    color: #e7e7e7 !important;
-}
-
-/* Search placeholder */
-.privateChannels_e6b769 input::placeholder,
-[class*="searchBar_"] input::placeholder {
-    color: #a0a0a0 !important;
-}
-
-/* Discord announcements / notice bars */
-.notice_c5cd6a {
-    background: #080808 !important;
-    color: #e7e7e7 !important;
-}
-
-.notice_c5cd6a *,
-.notice_c5cd6a a {
-    color: #e7e7e7 !important;
-}
-
-.notice_c5cd6a button {
-    background: #111111 !important;
-    color: #e7e7e7 !important;
-}
-
-.notice_c5cd6a button:hover {
-    background: #181818 !important;
-    color: #ffffff !important;
-}
-
-/* Server hover - remove Discord blue/purple */
-.wrapper__6e9f8:hover .childWrapper__6e9f8,
-.wrapper__6e9f8.selected__6e9f8 .childWrapper__6e9f8 {
-    background: #080808 !important;
-    color: #e7e7e7 !important;
-}
-
-/* Server icon itself - don't recolor actual server images */
-.wrapper__6e9f8:hover img,
-.wrapper__6e9f8.selected__6e9f8 img {
-    filter: none !important;
-}
-
-/* Home / Discord icon - don't force a color */
-.wrapper__6e9f8 .childWrapper__6e9f8 svg {
-    color: inherit !important;
-}
-
-/* Server selection pill - neutral instead of blue */
-[class*="guilds_"] [class*="item_"]::before,
-[class*="guilds_"] [class*="item_"]::after {
-    background-color: #d0d0d0 !important;
-}
-
-/* Remove blue hover backgrounds from normal Discord UI */
-[class*="interactive"]:hover,
-[class*="clickable"]:hover {
-    --blurple-1: #080808 !important;
-}
-
-/* Normal Discord brand buttons */
-[class*="button"][class*="lookFilled"] {
-    --button-background: #080808 !important;
-    --button-background-hover: #111111 !important;
-}
-
-/* Mentions should stay neutral */
-[class*="mention_"] {
-    color: #d0d0d0 !important;
-    background: rgba(255, 255, 255, 0.035) !important;
-}
-
-[class*="mention_"]:hover {
-    color: #ffffff !important;
-    background: rgba(255, 255, 255, 0.06) !important;
-}
-
-/* Normal Discord links */
-a,
-[class*="anchor_"] {
-    color: #d0d0d0 !important;
-}
-
-a:hover,
-[class*="anchor_"]:hover {
-    color: #ffffff !important;
+[class*="appMount_"],
+[class*="app_"],
+[class*="bg_"],
+[class*="layers_"],
+[class*="layer_"],
+[class*="guilds_"],
+[class*="sidebar_"],
+[class*="sidebarList_"],
+[class*="privateChannels_"],
+[class*="chat_"],
+[class*="chatContent_"],
+[class*="membersWrap_"],
+[class*="searchResultsWrap_"],
+[class*="homeWrapper_"],
+[class*="peopleColumn_"],
+[class*="nowPlayingColumn_"] {
+  background-color: #000000 !important;
 }
