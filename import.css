@@ -1000,3 +1000,200 @@ div[data-popout-animating="false"] > #emoji-picker-tab-panel {
 .activityPanel__5e434 {
   background-color: #080808 !important;
 }
+
+
+/* =========================================================
+   PITCHBLACK - DISCORD NATIVE BLUE OVERRIDES
+   Only targets Discord's normal UI colors.
+   Does NOT globally recolor icons or Vencord plugins.
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   FIND OR START A CONVERSATION
+   --------------------------------------------------------- */
+
+.privateChannels_e6b769 [class*="searchBar_"],
+.privateChannels_e6b769 [class*="searchBar_"] > div,
+.privateChannels_e6b769 [class*="searchBar_"] > div > div {
+  background: #080808 !important;
+  background-color: #080808 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.privateChannels_e6b769 [class*="searchBar_"]:hover {
+  background: #0a0a0a !important;
+}
+
+.privateChannels_e6b769 [class*="searchBar_"] input,
+.privateChannels_e6b769 [class*="searchBar_"] [class*="placeholder_"] {
+  color: #e7e7e7 !important;
+}
+
+.privateChannels_e6b769 [class*="searchBar_"] [class*="icon_"] {
+  color: #a0a0a0 !important;
+}
+
+
+/* ---------------------------------------------------------
+   DISCORD BLUE ANNOUNCEMENT / NOTICE BARS
+   --------------------------------------------------------- */
+
+/* Native Discord notice/announcement containers */
+[class*="notice_"],
+[class*="bar_"],
+[class*="newMessagesBar_"],
+[class*="jumpToPresentBar_"] {
+  background: #080808 !important;
+  color: #e7e7e7 !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Text inside native notice bars */
+[class*="notice_"] *,
+[class*="bar_"] *,
+[class*="newMessagesBar_"] *,
+[class*="jumpToPresentBar_"] * {
+  color: #e7e7e7 !important;
+}
+
+/* Announcement / notice buttons */
+[class*="notice_"] button,
+[class*="bar_"] button,
+[class*="newMessagesBar_"] button,
+[class*="jumpToPresentBar_"] button {
+  background: #111111 !important;
+  color: #e7e7e7 !important;
+  border: none !important;
+}
+
+[class*="notice_"] button:hover,
+[class*="bar_"] button:hover,
+[class*="newMessagesBar_"] button:hover,
+[class*="jumpToPresentBar_"] button:hover {
+  background: #181818 !important;
+  color: #ffffff !important;
+}
+
+
+/* ---------------------------------------------------------
+   SERVER HOVER
+   Remove Discord's default blue/blurple hover effect.
+   Keeps the actual server icon/image untouched.
+   --------------------------------------------------------- */
+
+[class*="guilds_"] [class*="wrapper_"]:hover {
+  background: transparent !important;
+}
+
+[class*="guilds_"] [class*="wrapper_"]:hover [class*="childWrapper_"] {
+  background: #080808 !important;
+  color: #e7e7e7 !important;
+}
+
+/* Remove Discord's blue hover background from server buttons */
+[class*="guilds_"] [class*="wrapper_"]:hover [class*="blobContainer_"] {
+  background: transparent !important;
+}
+
+
+/* ---------------------------------------------------------
+   SELECTED / CLICKED SERVER
+   No Discord blue background.
+   Do NOT force icon color.
+   --------------------------------------------------------- */
+
+[class*="guilds_"] [class*="wrapper_"][class*="selected_"],
+[class*="guilds_"] [class*="wrapper_"][aria-selected="true"] {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Selected server inner wrapper */
+[class*="guilds_"] [class*="wrapper_"][class*="selected_"] [class*="childWrapper_"],
+[class*="guilds_"] [class*="wrapper_"][aria-selected="true"] [class*="childWrapper_"] {
+  background: #080808 !important;
+  box-shadow: none !important;
+}
+
+/* Remove blue selected-server indicator */
+[class*="guilds_"] [class*="pill_"] {
+  background: transparent !important;
+}
+
+/* Keep the actual server image/icon untouched */
+[class*="guilds_"] [class*="wrapper_"] img {
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+
+/* ---------------------------------------------------------
+   REMOVE DISCORD BLURPLE FROM SERVER HOME ICON
+   Only Discord's default Home icon, not Vencord icons.
+   --------------------------------------------------------- */
+
+[class*="homeIcon_"] {
+  color: #e7e7e7 !important;
+}
+
+[class*="homeIcon_"]:hover {
+  color: #ffffff !important;
+}
+
+
+/* ---------------------------------------------------------
+   DISCORD NATIVE BRAND / BLUE INTERACTIVE STATES
+   --------------------------------------------------------- */
+
+.theme-dark {
+  --brand-experiment: #080808 !important;
+  --brand-experiment-100: #e7e7e7 !important;
+  --brand-experiment-200: #d0d0d0 !important;
+  --brand-experiment-300: #b0b0b0 !important;
+  --brand-experiment-400: #909090 !important;
+  --brand-experiment-500: #080808 !important;
+  --brand-experiment-600: #000000 !important;
+  --brand-experiment-700: #000000 !important;
+
+  --control-brand-foreground: #e7e7e7 !important;
+  --text-brand: #e7e7e7 !important;
+  --text-link: #d0d0d0 !important;
+}
+
+
+/* ---------------------------------------------------------
+   REMOVE BLUE FROM COMMON DISCORD SELECTION STATES
+   --------------------------------------------------------- */
+
+[class*="selected_"]:not([class*="profile"]):not([class*="userPopout"]),
+[aria-selected="true"]:not([class*="profile"]):not([class*="userPopout"]) {
+  --background-modifier-selected: #080808 !important;
+  --background-modifier-hover: #0a0a0a !important;
+}
+
+
+/* ---------------------------------------------------------
+   DISCORD NATIVE BUTTON HOVER
+   --------------------------------------------------------- */
+
+button:hover:not([class*="vc-"]):not([class*="bd-"]),
+[role="button"]:hover:not([class*="vc-"]):not([class*="bd-"]) {
+  --brand-experiment: #080808 !important;
+}
+
+
+/* ---------------------------------------------------------
+   LINKS / NORMAL DISCORD BLUE TEXT
+   Keep Vencord plugin elements excluded.
+   --------------------------------------------------------- */
+
+a:not([class*="vc-"]):not([class*="bd-"]),
+[class*="anchor_"]:not([class*="vc-"]):not([class*="bd-"]) {
+  color: #d0d0d0 !important;
+}
+
+a:not([class*="vc-"]):not([class*="bd-"]):hover,
+[class*="anchor_"]:not([class*="vc-"]):not([class*="bd-"]):hover {
+  color: #ffffff !important;
+}
